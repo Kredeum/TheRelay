@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "express:dev": "ts-node express/index.ts",
-    "express:query": "ts-node express/query.ts",
+    "dev": "nodemon express/index.ts",
+    "express:dev": "nodemon express/index.ts",
+    "express:query": "nodemon express/query.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "graphql": "^15.8.0",
     "http-server": "^14.1.1",
     "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.19",
     "underscore": "^1.13.4"
   },
   "dependencies": {
