@@ -66,7 +66,7 @@ app.use("/hi", (req, res) => {
 });
 
 app.use(
-  "/graphql",
+  "/graphiql",
   graphqlHTTP({
     schema: schema,
     graphiql: true,

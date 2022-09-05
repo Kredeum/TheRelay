@@ -20,7 +20,7 @@ const app = express();
 
 const ENDPOINT = "https://api.thegraph.com/subgraphs/name/amxx/nft-matic";
 const QUERY = `{
-  erc721Tokens(first: 9) {
+  ERC721Tokens(first: 9) {
     uri
   }
 }`;
@@ -59,7 +59,7 @@ app.use("/hi", (req, res) => {
 });
 
 app.use(
-  "/graphql",
+  "/graphiql",
   graphqlHTTP({
     schema: schema,
     graphiql: true,
@@ -67,5 +67,5 @@ app.use(
 );
 
 app.listen(PORT, () => {
-  console.log(`Listening on http://127.0.0.1:${PORT}`);
+  console.log(`Listening on http://127.0.0.1:${PORT}/graphiql`);
 });
