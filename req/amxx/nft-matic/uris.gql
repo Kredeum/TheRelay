@@ -1,0 +1,5 @@
+{
+  erc721Tokens(first: 9) {
+    uri
+  }
+}

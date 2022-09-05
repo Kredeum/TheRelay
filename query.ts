@@ -29,8 +29,8 @@ async function _graphQL(url: string, query: string): Promise<string> {
   return json.data || "";
 }
 
-const queryFile = process.argv[2] || "../req/tokens.gql";
-const url = process.argv[3] || "https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai";
+const url = process.argv[2] || "https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai";
+const queryFile = process.argv[3] || "req/zapaz/eip721_mumbai/tokens.gql";
 const query = fs.readFileSync(queryFile, "utf8");
 
 _graphQL(url, query).then((res) => {
