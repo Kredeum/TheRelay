@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLSchema, introspectionFromSchema, getIntrospectionQuery, IntrospectionQuery, buildSchema, buildClientSchema } from "graphql";
-import fs from "fs";
+import { GraphQLObjectType, GraphQLString, GraphQLSchema } from "graphql";
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",

@@ -12,4 +12,4 @@ const server = createServer({
   schema: executableSchema,
 });
 
-server.start();
+server.start().catch(console.error);

@@ -8,10 +8,11 @@
     "express:dev": "nodemon express/index.ts",
     "express:query": "nodemon express/query.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tokens": "ts-node scripts/query.ts https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai req/zapaz/eip721_mumbai/tokens.gql",
+    "owners": "ts-node scripts/query.ts https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai req/zapaz/eip721_mumbai/owners.gql",
     "graphiql": "ts-node express/index2.ts",
     "uris": "ts-node scripts/uris.ts",
-    "uris2json": "ts-node scripts/uris2json.ts"
+    "uris2json": "ts-node scripts/uris2json.ts",
+    "check": "eslint **/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -25,7 +26,11 @@
     "@types/node-fetch": "^2.6.2",
     "@types/object-mapper": "^6.2.0",
     "@types/underscore": "^1.11.4",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
     "dotenv": "^16.0.2",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
     "ethers": "^5.7.0",
     "express": "^4.18.1",
     "express-graphql": "^0.12.0",
@@ -35,6 +40,7 @@
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.19",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.0",
     "typescript": "^4.8.2",
     "underscore": "^1.13.4"
   }

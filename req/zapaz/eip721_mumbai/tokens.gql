@@ -7,10 +7,4 @@
     tokenURI
     metadata
   }
-  owners(first: 3) {
-    id
-    tokens(first: 3) {
-      id
-    }
-  }
 }

@@ -57,7 +57,7 @@ app.use("/api", async (req, res) => {
   const out721 = account.ERC721tokens.map((tok) => tok.uri);
   const out1155 = account.ERC1155balances.map((tok) => tok.token.uri);
 
-  let out = [...new Set([...out721, ...out1155])];
+  const out = [...new Set([...out721, ...out1155])];
   res.send(JSON.stringify(out, null, " "));
 });
 
