@@ -2,19 +2,14 @@ import fs from "fs";
 import { BigNumber } from "ethers";
 import { callFetchJson } from "@lib/callFetchJson";
 
+const chainId = 80001;
 
-const chainId = 137;
-
-type UriGqlType = {
-  id: string;
-  uri: string;
-
-};
+type UriGqlType = { uri?: string; tokenURI?: string; id: string };
 
 const uri2json = async (uriGql: UriGqlType) => {
   console.log(uriGql);
 
-  const res = uriGql.id.split("/");
+  const res = uriGql.id.split(/_|\//);
   if (res.length != 2) {
     console.error("ERROR token id", uriGql.id);
     return;
@@ -24,7 +19,7 @@ const uri2json = async (uriGql: UriGqlType) => {
 
   const collection = coll;
   const tokenID = BigNumber.from(tokId).toString();
-  const tokenURI = uriGql.uri;
+  const tokenURI = uriGql.uri || uriGql.tokenURI || "";
 
   const metadata = await callFetchJson(tokenURI);
   const nft = { chainId, collection, tokenID, tokenURI, metadata };
@@ -45,7 +40,7 @@ const uris2json = async (uris: UriGqlType[]) => {
 };
 
 const main = async () => {
-  const urisFile = process.argv[2] || "datas/137/uris.json";
+  const urisFile = process.argv[2] || `datas/${chainId}/uris.json`;
   const urisJson = fs.readFileSync(urisFile, "utf8");
   const uris = JSON.parse(urisJson) as Array<UriGqlType>;
   // console.log("main ~ uris", uris);

@@ -1,10 +1,6 @@
 {
   tokens(first: 99) {
     id
-    owner {
-      id
-    }
     tokenURI
-    metadata
   }
 }
