@@ -1,5 +1,5 @@
-import type { TheGraphQLResponse } from "@lib/theGraphQL";
-import { theGraphQL } from "@lib/theGraphQL";
+import type { TheGraphQLResponse } from "@lib/theGraph";
+import { theGraphQL } from "@lib/theGraph";
 import fs from "fs";
 
 theGraphQL("zapaz/eip721-mumbai", "tokens2uris")

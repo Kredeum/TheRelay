@@ -9,9 +9,9 @@
     "express:query": "nodemon express/query.ts",
     "graphiql": "ts-node express/index2.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "owners": "ts-node scripts/query.ts zapaz/eip721-mumbai owners",
-    "tokens": "ts-node scripts/query.ts zapaz/eip721-mumbai tokens",
-    "uris": "ts-node scripts/query.ts amxx/nft-matic uris",
+    "owners": "ts-node scripts/queryTheGraph.ts zapaz/eip721-mumbai owners",
+    "tokens": "ts-node scripts/queryTheGraph.ts zapaz/eip721-mumbai tokens",
+    "uris": "ts-node scripts/queryTheGraph.ts amxx/nft-matic uris",
     "tokens2uris": "ts-node scripts/tokens2uris.ts",
     "uris2json": "ts-node scripts/uris2json.ts",
     "check": "eslint **/*.ts"

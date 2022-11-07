@@ -1,10 +1,10 @@
+import type { RequestInit } from "node-fetch";
 import fetch from "node-fetch";
 
-const fetchJson = async (url: string): Promise<string> => {
-  console.log(`fetchJson ${url}`);
+const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): Promise<string> => {
+  // console.log(`fetchJson ${url} ${JSON.stringify(config)}`);
 
   let json = "{}";
-  const config = { method: "GET" };
 
   try {
     const res = await fetch(url, config);
@@ -14,7 +14,7 @@ const fetchJson = async (url: string): Promise<string> => {
     console.error("fetchJson fetch ERROR", e);
   }
 
-  console.log(json);
+  // console.log("fetchJson", json);
   return json;
 };
 
