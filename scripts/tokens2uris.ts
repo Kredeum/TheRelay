@@ -1,13 +1,9 @@
-import type { CallGraphQLResponse } from "@lib/callGraphQL";
-import { callGraphQL } from "@lib/callGraphQL";
+import type { TheGraphQLResponse } from "@lib/theGraphQL";
+import { theGraphQL } from "@lib/theGraphQL";
 import fs from "fs";
 
-const url = "https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai";
-const queryFile = "./req/zapaz/eip721-mumbai/tokens2uris.gql";
-const query = fs.readFileSync(queryFile, "utf8");
-
-callGraphQL(url, query)
-  .then((json: CallGraphQLResponse): void => {
+theGraphQL("zapaz/eip721-mumbai", "tokens2uris")
+  .then((json: TheGraphQLResponse): void => {
     // console.log(json);
     if (json.errors) return;
 

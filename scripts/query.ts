@@ -1,15 +1,15 @@
-import type { CallGraphQLResponse } from "@lib/callGraphQL";
-import { callGraphQL } from "@lib/callGraphQL";
-import fs from "fs";
+import type { TheGraphQLResponse } from "@lib/theGraphQL";
+import { theGraphQL } from "@lib/theGraphQL";
 
-const defaultReq = process.argv.length >= 3 ? process.argv[2] : "zapaz/eip721-mumbai/owners";
-const url = `https://api.thegraph.com/subgraphs/name/${defaultReq.substr(0, defaultReq.lastIndexOf("/"))}`;
-const queryFile = `req/${defaultReq}.gql`;
+const main = async () => {
+  if (process.argv.length < 4) throw "Usage: ts-snode query.ts <graphName> <queryName>";
 
-const query = fs.readFileSync(queryFile, "utf8");
+  let queryParams = {};
+  if (process.argv.length > 4) queryParams = { collectionAddress: process.argv[4] };
 
-callGraphQL(url, query)
-  .then((res: CallGraphQLResponse) => {
+  return await theGraphQL(process.argv[2], process.argv[3], queryParams).then((res: TheGraphQLResponse) => {
     console.log(JSON.stringify(res.data, null, "  "));
-  })
-  .catch(console.error);
+  });
+};
+
+main().catch(console.error);

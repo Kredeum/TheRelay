@@ -1,6 +1,6 @@
 import fs from "fs";
 import { BigNumber } from "ethers";
-import { callFetchJson } from "@lib/callFetchJson";
+import { fetchJson } from "@lib/fetchJson";
 
 const chainId = 80001;
 
@@ -21,7 +21,7 @@ const uri2json = async (uriGql: UriGqlType) => {
   const tokenID = BigNumber.from(tokId).toString();
   const tokenURI = uriGql.uri || uriGql.tokenURI || "";
 
-  const metadata = await callFetchJson(tokenURI);
+  const metadata = await fetchJson(tokenURI);
   const nft = { chainId, collection, tokenID, tokenURI, metadata };
   const medataJson = JSON.stringify(nft, null, 2);
   console.log(nft);

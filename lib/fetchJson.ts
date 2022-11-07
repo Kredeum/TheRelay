@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
-const callFetchJson = async (url: string): Promise<string> => {
-  console.log(`callFetchJson ${url}`);
+const fetchJson = async (url: string): Promise<string> => {
+  console.log(`fetchJson ${url}`);
 
   let json = "{}";
   const config = { method: "GET" };
@@ -18,4 +18,4 @@ const callFetchJson = async (url: string): Promise<string> => {
   return json;
 };
 
-export { callFetchJson };
+export { fetchJson };

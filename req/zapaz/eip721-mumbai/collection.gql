@@ -1,0 +1,12 @@
+{
+  tokenContract(id: "{{collectionAddress}}") {
+    tokens(first: 3) {
+      id
+      owner {
+        id
+      }
+      tokenURI
+      metadata
+    }
+  }
+}
