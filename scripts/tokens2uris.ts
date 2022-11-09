@@ -1,13 +1,13 @@
-import type { TheGraphQLResponse } from "@lib/theGraph";
-import { theGraphQL } from "@lib/theGraph";
+import { getEndpointTheGraph } from "@lib/getEndpoint";
+import { getQueryByName } from "@lib/getQuery";
+import { queryGraphQL } from "@lib/queryGraphQL";
 import fs from "fs";
 
-theGraphQL("zapaz/eip721-mumbai", "tokens2uris")
-  .then((json: TheGraphQLResponse): void => {
+queryGraphQL(getEndpointTheGraph("zapaz/eip721-mumbai"), getQueryByName("zapaz/eip721-mumbai", "tokens2uris"))
+  .then((json: string): void => {
     // console.log(json);
-    if (json.errors) return;
 
-    const { tokens } = json.data as { tokens: Array<{ id: string; uri: string }> };
+    const { tokens } = JSON.parse(json) as { tokens: Array<{ id: string; uri: string }> };
     const urisJson = JSON.stringify(tokens, null, 2);
     console.log(urisJson);
 

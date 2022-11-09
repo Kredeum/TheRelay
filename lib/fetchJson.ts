@@ -2,7 +2,9 @@ import type { RequestInit } from "node-fetch";
 import fetch from "node-fetch";
 
 const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): Promise<string> => {
-  // console.log(`fetchJson ${url} ${JSON.stringify(config)}`);
+  // console.log(`fetchJson\n${url}`);
+  // console.log(config);
+  // console.log(config.body);
 
   let json = "{}";
 
@@ -11,7 +13,7 @@ const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): 
 
     json = (await res.json()) as string;
   } catch (e) {
-    console.error("fetchJson fetch ERROR", e);
+    console.error("fetchJson ERROR", e);
   }
 
   // console.log("fetchJson", json);

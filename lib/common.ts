@@ -1,8 +1,11 @@
-const PORT = 4000;
+const RELAY_PROTOCOL = "http";
+const RELAY_DOMAIN = "127.0.0.1";
+const RELAY_PORT = 4004;
+const RELAY_URL = `${RELAY_PROTOCOL}://${RELAY_DOMAIN}:${RELAY_PORT}`;
 
-type RelayType = {
+type QueryType = {
   endpointUrl: string;
   query: string;
 }
 
-export { PORT, RelayType }
+export { RELAY_PROTOCOL, RELAY_DOMAIN, RELAY_PORT, RELAY_URL, QueryType };

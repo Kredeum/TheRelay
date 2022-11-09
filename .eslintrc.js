@@ -21,6 +21,16 @@ module.exports = {
   },
   ignorePatterns: ["node_modules"],
   rules: {
+    "no-empty": "off",
+    indent: ["error", 2],
+    semi: ["error", "always"],
+    quotes: ["error", "double"],
+    "no-global-assign": [
+      "error",
+      {
+        exceptions: ["require"]
+      }
+    ],
     "@typescript-eslint/no-unsafe-assignment": "warn",
     "@typescript-eslint/no-unsafe-call": "warn",
     "@typescript-eslint/no-unsafe-argument": "warn",
@@ -30,15 +40,6 @@ module.exports = {
     "@typescript-eslint/restrict-template-expressions": "warn",
     "@typescript-eslint/no-unsafe-return": "warn",
     "@typescript-eslint/ban-types": "warn",
-    "@typescript-eslint/require-await": "warn",
-    indent: ["error", 2],
-    semi: ["error", "always"],
-    quotes: ["error", "double"],
-    "no-global-assign": [
-      "error",
-      {
-        exceptions: ["require"]
-      }
-    ]
+    "@typescript-eslint/require-await": "warn"
   }
 };

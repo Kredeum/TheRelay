@@ -1,0 +1,9 @@
+{
+  owners(first: 9) {
+    id
+    tokens(first: 9) {
+      id
+      tokenURI
+    }
+  }
+}

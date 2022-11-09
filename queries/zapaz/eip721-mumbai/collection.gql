@@ -1,6 +1,6 @@
 {
   tokenContract(id: "{{collectionAddress}}") {
-    tokens(first: 3) {
+    tokens(first: 9) {
       id
       owner {
         id
