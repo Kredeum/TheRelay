@@ -1,0 +1,6 @@
+{
+  tokens: erc721Tokens(first: 3, skip: 1000) {
+    id
+    uri
+  }
+}

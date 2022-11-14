@@ -1,0 +1,9 @@
+{
+  tokenContract(id: "{{collectionAddress}}") {
+    id
+    name
+    numTokens
+    numOwners
+    supportsEIP721Metadata
+  }
+}

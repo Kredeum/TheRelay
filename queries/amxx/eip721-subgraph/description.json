@@ -1,0 +1,12 @@
+{
+  "chainId": 1,
+  "name": "amxx/eip721-subgraph",
+  "slug": "AVZ1dGwmRGKsbDAbwvxNmXzeEkD48voB3LfGqj5w7FUS",
+  "version": "v1.0.0",
+  "endpoint-prod": "https://gateway.thegraph.com/api/[api-key]/subgraphs/id/AVZ1dGwmRGKsbDAbwvxNmXzeEkD48voB3LfGqj5w7FUS",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/amxx/eip721-subgraph",
+  "explorer": "https://thegraph.com/explorer/subgraphs/AVZ1dGwmRGKsbDAbwvxNmXzeEkD48voB3LfGqj5w7FUS?view=Overview",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/amxx/eip721-subgraph",
+  "id": "QmaaDA7XVVktfxCLMgfwG1z3KM8DSMoLkbemkTt9mQT8Qf",
+  "synced": 100
+}

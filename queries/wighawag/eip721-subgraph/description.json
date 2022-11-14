@@ -1,0 +1,9 @@
+{
+  "chainId": 1,
+  "name": "wighawag/eip721-subgraph",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/wighawag/eip721-subgraph",
+  "github": "https://github.com/wighawag/eip721-subgraph",
+  "id": "QmZy62F1CjxzvGPJdmHWX6kzfgFJTTjVZM6FVhG68ZeNvs",
+  "synced": 100
+}

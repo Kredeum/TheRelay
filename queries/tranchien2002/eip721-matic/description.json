@@ -1,0 +1,8 @@
+{
+  "chainId": 137,
+  "name": "tranchien2002/eip721-matic",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/tranchien2002/eip721-matic",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/tranchien2002/eip721-matic",
+  "id": "QmTK6AB93wBy9Q8sBXseCzssC3wF12rgrJbyZRsGdLFu43",
+  "synced": 100
+}

@@ -1,0 +1,9 @@
+{
+  "chainId": 80001,
+  "name": "zapaz/eip721-mumbai",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/zapaz/eip721-mumbai",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/zapaz/eip721-mumbai/",
+  "github": "https://github.com/Kredeum/ethglobal-web3",
+  "id": "QmTwYfm6fRZwvBoKsyXJ62e9auHYreQibTfkLf2uGvsm1v",
+  "synced": 74.4
+}

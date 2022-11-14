@@ -5,7 +5,7 @@
       owner {
         id
       }
-      tokenURI
+      uri: tokenURI
       metadata
     }
   }

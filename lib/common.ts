@@ -8,4 +8,9 @@ type QueryType = {
   query: string;
 }
 
-export { RELAY_PROTOCOL, RELAY_DOMAIN, RELAY_PORT, RELAY_URL, QueryType };
+type QueryOptionsType = {
+  collectionAddress?: string;
+  logs?: boolean;
+}
+
+export { RELAY_PROTOCOL, RELAY_DOMAIN, RELAY_PORT, RELAY_URL, QueryType, QueryOptionsType };

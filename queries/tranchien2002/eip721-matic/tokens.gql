@@ -1,0 +1,6 @@
+{
+  tokens(first: 3) {
+    id
+    tokenURI
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "chainId": 4,
+  "name": "zapaz/eip721-rinkeby",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/zapaz/eip721-rinkeby",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/zapaz/eip721-rinkeby/",
+  "github": "https://github.com/Kredeum/ethglobal-web3",
+  "id": "QmPrPLmP917xshqP7mwSHnm4yLBu1i3wxvAjBE53Zu85yE",
+  "synced": 100
+}

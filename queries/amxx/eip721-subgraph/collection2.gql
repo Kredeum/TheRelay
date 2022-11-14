@@ -1,0 +1,9 @@
+{
+  erc721Contract(id: "{{collectionAddress}}") {
+    name
+    tokens(first: 5) {
+      id
+      uri
+    }
+  }
+}

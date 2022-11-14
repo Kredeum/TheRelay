@@ -1,0 +1,9 @@
+{
+  "chainId": 137,
+  "name": "zapaz/eip721-matic",
+  "endpoint": "https://api.thegraph.com/subgraphs/name/zapaz/eip721-matic",
+  "hosted": "https://thegraph.com/hosted-service/subgraph/zapaz/eip721-matic/",
+  "github": "https://github.com/Kredeum/ethglobal-web3",
+  "id": "Qmdx1iqLRY8EmvRPjzCmgMvzVq2dN4JabdrMY2AmEvAEFN",
+  "synced": 56.8
+}

@@ -1,6 +1,6 @@
 {
   erc721Tokens(first: 9) {
     id
-    uri
+    tokenURI: uri
   }
 }

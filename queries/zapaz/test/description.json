@@ -1,0 +1,11 @@
+{
+  "chainId": 1,
+  "name": "zapaz/test",
+  "slug": "test",
+  "version": "v0.0.1",
+  "endpoint": "https://api.studio.thegraph.com/query/457/test/v0.0.1",
+  "endpoint-prod": "https://gateway.testnet.thegraph.com/api/{{api-key}}/subgraphs/id/7ekZHhJ3y11rBcoBMhXYsw8JaZTyq7gaSiJjhcCDxcHy",
+  "studio": "https://thegraph.com/studio/subgraph/test/",
+  "id": "QmenR8xUcamKtvqoSSvitXF9b2aGWKqmSZqD3wa1FVK4sJ",
+  "synced": 100
+}
