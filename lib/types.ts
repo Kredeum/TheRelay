@@ -18,6 +18,7 @@ type QueryType = {
 }
 
 type QueryOptionsType = {
+  relay?: boolean;
   relayUrl?: string;
   collectionAddress?: string;
   logs?: boolean;

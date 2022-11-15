@@ -42,7 +42,8 @@ const main = async () => {
     .argument("<queryName>", "query name")
     .argument("[queryParams]", "query params")
     .option("-l , --logs", "display query request")
-    .option("-r, --relayUrl <string>", "optional relay url")
+    .option("-r, --relay", "embedded relay")
+    .option("-u, --relayUrl <string>", "remote relay url")
     .option("-c, --collection-address <string>", "collection address")
     .action(async (graphName, queryName, queryParams, options) => {
       queryParams = JSON.parse(queryParams || "{}");

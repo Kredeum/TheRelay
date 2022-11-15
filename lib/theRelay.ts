@@ -10,13 +10,15 @@ import fetch from "node-fetch";
 import morgan from "morgan";
 
 import { IncomingMessage, Server, ServerResponse } from "http";
-import { queryGraphQL } from "./query/queryGraphQL";
-import { addMetadata, addMetadatas, TokenType } from "./metadata/metadataAdd";
+import cors from "cors";
+import { queryGraphQL } from "@lib/query/queryGraphQL";
+import { addMetadatas, TokenType } from "@lib/metadata/metadataAdd";
 
 
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
 
 const app = express();
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
@@ -30,22 +32,33 @@ app.get("/stop", (req, res) => {
 });
 
 app.post("*", async (req, res): Promise<void> => {
-  // console.log("app.post", req.body);
+  console.log("POST", req.body);
+  console.log("POST", req);
 
   const { query } = req.body as { query: string };
-  if (!query) { res.json("no query"); return; }
+  if (!query) {
+    console.error("ERROR TheRelay no query");
+    res.json("no query"); return;
+  }
 
   const endpoint = req.path.slice(1);
-  if (!endpoint) { res.json("no endpoint"); return; }
+  if (!endpoint) {
+    console.error("ERROR TheRelay no endpoint");
+    res.json("no endpoint"); return;
+  }
   console.log(`TheRelay ${endpoint}\n${query}`);
 
   const json = await queryGraphQL(endpoint, query);
+  console.log("TheGraph", json);
 
   const { tokens } = JSON.parse(json) as { tokens: Array<TokenType> };
 
   await addMetadatas(tokens);
 
-  res.json(JSON.stringify(tokens, null, "  "));
+  const jsonMetadata = JSON.stringify(tokens, null, "  ");
+  console.log("TheRelay", jsonMetadata);
+
+  res.json(jsonMetadata);
 });
 
 

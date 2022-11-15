@@ -20,10 +20,11 @@ const queryTheRelay = async (relayUrl: string, endpoint: string, query: string, 
   const url = `${relayUrl}/${endpoint}`;
   // console.log("queryTheRelay", url);
 
-  const status = await theRelay("start");
-  // console.log("queryTheRelay", status);
+  let status = "";
+  if (options?.relay) status = await theRelay("start");
 
   const json = await fetchJson(url, config);
+
   if (status == THERELAY_STARTING) await theRelay("stop");
 
   // console.log("queryTheRelay", json);
