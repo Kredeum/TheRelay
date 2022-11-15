@@ -1,8 +1,8 @@
-import { fetchJson } from "@lib/fetchJson";
-import { saveMetadata } from "@lib/saveMetadata";
-import { readMetadata } from "./readMetadata";
+import { fetchJson } from "@lib/fetch/fetchJson";
+import { metadataSave } from "@lib/metadata/metadataSave";
+import { readMetadata } from "@lib/metadata/metadataRead";
 
-type TokenType = { id: string; uri: string; metadata?: unknown; }
+type TokenType = { id: string; tokenURI: string; metadata?: unknown; }
 
 
 const addMetadata = async (token: TokenType, chainId = 1): Promise<void> => {
@@ -12,8 +12,8 @@ const addMetadata = async (token: TokenType, chainId = 1): Promise<void> => {
 
   const savedMetadata: unknown = readMetadata(address, tokenID, chainId);
   if (savedMetadata == "") {
-    token.metadata = await fetchJson(token.uri);
-    saveMetadata(token.metadata, address, tokenID, chainId);
+    token.metadata = await fetchJson(token.tokenURI);
+    metadataSave(token.metadata, address, tokenID, chainId);
   } else {
     token.metadata = savedMetadata;
   }

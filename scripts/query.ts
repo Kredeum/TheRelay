@@ -5,10 +5,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Command } from "commander";
 import { theRelay } from "@lib/theRelay";
-import { getQueryByName, getQueryByPath } from "@lib/getQuery";
-import { getEndpointTheGraph } from "@lib/getEndpoint";
-import { queryGraphQL } from "@lib/queryGraphQL";
-import { queryTheRelay } from "@lib/queryTheRelay";
+import { queryGetByName, queryGetByPath, queryGetTheGraphEndpoint } from "@lib/query/queryGet";
+import { queryGraphQL } from "@lib/query/queryGraphQL";
+import { queryTheGraph } from "@lib/query/queryTheGraph";
 
 
 
@@ -17,8 +16,8 @@ const main = async () => {
 
   program
     .name("query")
-    .description("Query TheRelay, TheGraph or GraphQL")
-    .version("0.0.2");
+    .description("Query TheGraph with TheRelay")
+    .version("0.0.3");
 
   program
     .command("relay")
@@ -29,11 +28,11 @@ const main = async () => {
   program
     .command("graphql")
     .description("Query Graphql, query whatever GraphQL service")
-    .argument("<endpointUrl>", "endpoint url")
+    .argument("<endpoint>", "endpoint url")
     .argument("<queryPath>", "query path")
     .argument("[queryParams]", "query params")
-    .action(async (endpointUrl, queryPath, queryParams) => {
-      console.log(await queryGraphQL(endpointUrl, getQueryByPath(queryPath, queryParams)));
+    .action(async (endpoint, queryPath, queryParams) => {
+      console.log(await queryGraphQL(endpoint, queryGetByPath(queryPath, queryParams)));
     });
 
   program
@@ -43,25 +42,18 @@ const main = async () => {
     .argument("<queryName>", "query name")
     .argument("[queryParams]", "query params")
     .option("-l , --logs", "display query request")
-    .option("-r, --relay", "with proxy relay")
+    .option("-r, --relayUrl <string>", "optional relay url")
     .option("-c, --collection-address <string>", "collection address")
     .action(async (graphName, queryName, queryParams, options) => {
       queryParams = JSON.parse(queryParams || "{}");
+
+      const endpoint = queryGetTheGraphEndpoint(graphName);
+      const query = queryGetByName(graphName, queryName, queryParams);
       if (options.collectionAddress) {
         queryParams.collectionAddress = String(options.collectionAddress).toLowerCase();
       }
 
-      const query = getQueryByName(graphName, queryName, queryParams);
-
-      if (options.relay) {
-        await theRelay("start");
-
-        console.log(await queryTheRelay(graphName, query, options));
-
-        await theRelay("stop");
-      } else {
-        console.log(await queryGraphQL(getEndpointTheGraph(graphName), query, options));
-      }
+      console.log(await queryTheGraph(endpoint, query, options));
     });
 
   await program.parseAsync(process.argv);

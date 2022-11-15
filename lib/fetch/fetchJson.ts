@@ -13,7 +13,7 @@ const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): 
 
     json = (await res.json()) as unknown;
   } catch (e) {
-    console.error("fetchJson ERROR", e);
+    console.error("fetchJson ERROR", e, url, config);
   }
 
   // console.log("fetchJson", json);

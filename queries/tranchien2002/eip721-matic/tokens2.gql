@@ -1,0 +1,13 @@
+{
+  tokens(first: 3) {
+    id
+    owner {
+      id
+    }
+    tokenID
+    tokenURI
+    contract {
+      id
+    }
+  }
+}

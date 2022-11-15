@@ -3,7 +3,7 @@
     name
     tokens(first: 5) {
       id
-      uri
+      tokenURI: uri
     }
   }
 }

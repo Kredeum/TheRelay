@@ -21,7 +21,7 @@ const app = express();
 const ENDPOINT = "https://api.thegraph.com/subgraphs/name/amxx/nft-matic";
 const QUERY = `{
   ERC721Tokens(first: 9) {
-    uri
+    tokenURI: uri
   }
 }`;
 console.log("QUERY", QUERY);
@@ -33,23 +33,23 @@ type InputType = {
 };
 
 type UriType = Array<{
-  uri: string;
+  tokenURI: string;
 }>;
 
 // type UriBalType = Array<{
-//   token: { uri: string };
+//   token: { tokenURI: string };
 // }>;
 
 type OutputType = Array<string>;
 
-// const transform = (input: UriType): OutputType => input.map((item) => item.uri);
+// const transform = (input: UriType): OutputType => input.map((item) => item.tokenURI);
 
 app.use("/api", async (req, res) => {
   const input: string = await remoteGraphQL(ENDPOINT, QUERY);
 
   const { erc721Tokens } = (JSON.parse(input) as InputType).data;
 
-  const out721 = erc721Tokens.map((tok) => tok.uri);
+  const out721 = erc721Tokens.map((tok) => tok.tokenURI);
 
   res.send(JSON.stringify(out721, null, " "));
 });

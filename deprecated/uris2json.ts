@@ -1,6 +1,6 @@
 import fs from "fs";
 import { BigNumber } from "ethers";
-import { fetchJson } from "@lib/fetchJson";
+import { fetchJson } from "@lib/fetch/fetchJson";
 
 const chainId = 80001;
 
@@ -31,11 +31,11 @@ const uri2json = async (uriGql: UriGqlType) => {
   fs.writeFileSync(`${tokenDir}/metadata.json`, medataJson, "utf8");
 };
 
-const uris2json = async (uris: UriGqlType[]) => {
-  console.log("uris2json ~ uris", uris);
+const uris2json = async (tokenURIs: UriGqlType[]) => {
+  console.log("uris2json", tokenURIs);
 
-  for (const uri of uris) {
-    await uri2json(uri);
+  for (const tokenURI of tokenURIs) {
+    await uri2json(tokenURI);
   }
 };
 

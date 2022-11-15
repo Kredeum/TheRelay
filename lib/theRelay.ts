@@ -1,22 +1,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { queryGraphQL } from "@lib/queryGraphQL";
 import type { Response } from "node-fetch";
 
 import express from "express";
-import { RELAY_PORT, RELAY_URL, QueryType } from "@lib/common";
+import {
+  THERELAY_PORT, THERELAY_URL, THERELAY_RUNNING, THERELAY_STOPPING,
+  THERELAY_STOPPED, THERELAY_STARTING
+} from "@lib/types";
 import fetch from "node-fetch";
 import morgan from "morgan";
 
-import type { TokenType } from "./addMetadatas";
-import { addMetadatas } from "./addMetadatas";
-
 import { IncomingMessage, Server, ServerResponse } from "http";
+import { queryGraphQL } from "./query/queryGraphQL";
+import { addMetadata, addMetadatas, TokenType } from "./metadata/metadataAdd";
 
-const STATUS_RUNNING = "RUNNING";
-const STATUS_STOPPING = "STOPPING";
-const STATUS_STOPPED = "STOPPED";
-const STATUS_ERROR = "ERROR";
-const STATUS_STARTING = "STARTING";
 
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
 
@@ -24,19 +20,26 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/", (req, res) => (res.send("NFT IPFS RELAY")));
-app.get("/status", (req, res) => (res.send(STATUS_RUNNING)));
+app.get("/info", (req, res) => (res.send("NFT IPFS RELAY")));
+app.get("/status", (req, res) => (res.send(THERELAY_RUNNING)));
 app.post("/query", (req, res) => (res.json(req.body)));
 
 app.get("/stop", (req, res) => {
-  res.send(STATUS_STOPPING);
+  res.send(THERELAY_STOPPING);
   server.close();
 });
 
-app.post("/", async (req, res): Promise<void> => {
-  const { endpointUrl, query } = req.body as QueryType;
+app.post("*", async (req, res): Promise<void> => {
+  // console.log("app.post", req.body);
 
-  const json = await queryGraphQL(endpointUrl, query);
+  const { query } = req.body as { query: string };
+  if (!query) { res.json("no query"); return; }
+
+  const endpoint = req.path.slice(1);
+  if (!endpoint) { res.json("no endpoint"); return; }
+  console.log(`TheRelay ${endpoint}\n${query}`);
+
+  const json = await queryGraphQL(endpoint, query);
 
   const { tokens } = JSON.parse(json) as { tokens: Array<TokenType> };
 
@@ -50,9 +53,9 @@ const theRelayStatus = async (): Promise<string> => {
   let message = "";
 
   try {
-    const resp: Response = await fetch(`${RELAY_URL}/status`);
+    const resp: Response = await fetch(`${THERELAY_URL}/status`);
     message = await resp.text();
-  } catch (err) { message = STATUS_STOPPED; }
+  } catch (err) { message = THERELAY_STOPPED; }
 
   // console.log("theRelayStatus", message);
   return message;
@@ -61,10 +64,10 @@ const theRelayStatus = async (): Promise<string> => {
 const theRelayStop = async (): Promise<string> => {
   let message = "";
 
-  if (await theRelayStatus() == STATUS_STOPPED) {
-    message = `ALREADY ${STATUS_STOPPED}`;
+  if (await theRelayStatus() == THERELAY_STOPPED) {
+    message = `ALREADY ${THERELAY_STOPPED}`;
   } else {
-    const resp: Response = await fetch(`${RELAY_URL}/stop`);
+    const resp: Response = await fetch(`${THERELAY_URL}/stop`);
     message = await resp.text();
   }
 
@@ -74,11 +77,12 @@ const theRelayStop = async (): Promise<string> => {
 const theRelayStart = async (): Promise<string> => {
   let message = "";
 
-  if (await theRelayStatus() == STATUS_RUNNING) {
-    message = `ALREADY ${STATUS_RUNNING}`;
+  if (await theRelayStatus() == THERELAY_RUNNING) {
+    message = `ALREADY ${THERELAY_RUNNING}`;
   } else {
-    server = app.listen(RELAY_PORT, () => {
-      console.log(`TheRelay listening on ${RELAY_URL}`);
+    message = THERELAY_STARTING;
+    server = app.listen(THERELAY_PORT, () => {
+      console.log(`TheRelay listening on ${THERELAY_URL}`);
     });
   }
 

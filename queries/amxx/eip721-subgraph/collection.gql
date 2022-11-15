@@ -1,6 +1,6 @@
 {
   tokens: erc721Tokens(where: { contract: "{{collectionAddress}}" }) {
     id
-    uri
+    tokenURI: uri
   }
 }
