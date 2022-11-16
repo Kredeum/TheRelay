@@ -10,19 +10,31 @@ const queryGetByFile = (queryFile: string, queryParams = {}): string => {
   return queryGetPreprocessed(fs.readFileSync(queryFile, "utf8"), queryParams);
 };
 
+const queryGetSubgraphDescription = (graphName: string): unknown => {
+  const descriptionFile = `queries/${graphName}/metadata.json`;
+  if (!fs.existsSync(descriptionFile)) throw `File '${descriptionFile}' does not exists!`;
+
+  const descriptionJson = fs.readFileSync(descriptionFile, "utf8");
+  console.log("queryGetSubgraphDescription", descriptionJson);
+
+  return JSON.parse(descriptionJson) as unknown;
+};
+
 const queryGetByPath = (queryPath: string, queryParams = {}): string =>
   queryGetByFile(`queries/${queryPath}.gql`, queryParams);
 
 const queryGetByName = (graphName: string, queryName: string, queryParams = {}): string =>
   queryGetByPath(`${graphName}/${queryName}`, queryParams);
 
-const queryGetTheGraphEndpoint = (graphName: string): string =>
-  `${THEGRAPH_BASE_ENDPOINT}/${graphName}`;
+const queryGetTheGraphEndpoint = (graphName: string): string => {
+  console.log("queryGetTheGraphEndpoint", graphName);
 
-const queryGetSubgraphName = (subgraph: string): string =>
-  subgraph.replace(`${THEGRAPH_BASE_ENDPOINT}/`, "");
+  const endpoint = (queryGetSubgraphDescription(graphName) as { endpoint: string }).endpoint;
+
+  return endpoint || `${THEGRAPH_BASE_ENDPOINT}/${graphName}`;
+};
 
 export {
   queryGetPreprocessed, queryGetByFile, queryGetByPath, queryGetByName,
-  queryGetSubgraphName, queryGetTheGraphEndpoint
+  queryGetTheGraphEndpoint, queryGetSubgraphDescription
 };

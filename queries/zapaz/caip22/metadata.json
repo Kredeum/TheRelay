@@ -1,0 +1,10 @@
+{
+  "chainId": 5,
+  "name": "zapaz/caip22",
+  "slug": "caip22",
+  "version": "v0.0.9",
+  "endpoint": "https://api.studio.thegraph.com/query/457/caip22/v0.0.9",
+  "studio": "https://thegraph.com/studio/subgraph/caip22",
+  "id": "QmVxY2MQwtj3uJWYtzD4TpybPcPvenDVhkzfV3pi8dJadH",
+  "synced": 100
+}

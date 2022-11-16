@@ -1,0 +1,10 @@
+{
+  tokens(first: 5) {
+    id
+    chainId
+    address
+    tokenID
+    tokenURI
+    owner
+  }
+}
