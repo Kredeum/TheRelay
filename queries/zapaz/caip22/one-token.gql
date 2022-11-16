@@ -1,0 +1,6 @@
+{
+  tokens(first: 1, skip: 1000) {
+    id
+    tokenURI
+  }
+}

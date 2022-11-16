@@ -6,9 +6,24 @@ type TokenType = { id: string; tokenURI: string; metadata?: unknown; }
 
 
 const addMetadata = async (token: TokenType, chainId = 1): Promise<void> => {
-  const res = token.id.split(/_|\//);
-  if (res.length != 2) throw `Bad token id ${token.id}`;
-  const [address, tokenID] = res;
+
+  // Match id : 0x001c3c3cc1a2147a610033dd658003a2db6ad0a3/1710
+  // Match id : 0x001c3c3cc1a2147a610033dd658003a2db6ad0a3_1710
+  const res1 = token.id.match(/^(0x[0-9a-f]{40})(\/|_)([0-9]*)$/);
+
+  // Match id : eip155:5/erc721:0x001c3c3cc1a2147a610033dd658003a2db6ad0a3/1
+  const res2 = token.id.match(/^eip155:([0-9]*)\/erc721:(0x[0-9a-f]{40})\/([0-9]*)$/);
+
+  let address: string;
+  let tokenID: string;
+  let chainID = "0";
+
+  if (res1?.length == 4) [, address, , tokenID] = res1;
+  else if (res2?.length == 4) [, chainID, address, tokenID] = res2;
+  else return;
+  if (Number(chainID) > 0) chainId = Number(chainID);
+
+  console.log("addMetadata", chainId, address, tokenID);
 
   const savedMetadata: unknown = readMetadata(address, tokenID, chainId);
   if (savedMetadata == "") {

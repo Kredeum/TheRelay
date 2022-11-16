@@ -15,7 +15,7 @@ const queryGetSubgraphDescription = (graphName: string): unknown => {
   if (!fs.existsSync(descriptionFile)) throw `File '${descriptionFile}' does not exists!`;
 
   const descriptionJson = fs.readFileSync(descriptionFile, "utf8");
-  console.log("queryGetSubgraphDescription", descriptionJson);
+  // console.log("queryGetSubgraphDescription", descriptionJson);
 
   return JSON.parse(descriptionJson) as unknown;
 };
@@ -27,7 +27,7 @@ const queryGetByName = (graphName: string, queryName: string, queryParams = {}):
   queryGetByPath(`${graphName}/${queryName}`, queryParams);
 
 const queryGetTheGraphEndpoint = (graphName: string): string => {
-  console.log("queryGetTheGraphEndpoint", graphName);
+  // console.log("queryGetTheGraphEndpoint", graphName);
 
   const endpoint = (queryGetSubgraphDescription(graphName) as { endpoint: string }).endpoint;
 

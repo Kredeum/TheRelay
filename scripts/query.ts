@@ -32,7 +32,7 @@ const main = async () => {
     .argument("<queryPath>", "query path")
     .argument("[queryParams]", "query params")
     .action(async (endpoint, queryPath, queryParams) => {
-      console.log(await queryGraphQL(endpoint, queryGetByPath(queryPath, queryParams)));
+      console.info(await queryGraphQL(endpoint, queryGetByPath(queryPath, queryParams)));
     });
 
   program
@@ -45,16 +45,18 @@ const main = async () => {
     .option("-r, --relay", "embedded relay")
     .option("-u, --relayUrl <string>", "remote relay url")
     .option("-c, --collection-address <string>", "collection address")
+    .option("-o, --owner-address <string>", "owner address")
     .action(async (graphName, queryName, queryParams, options) => {
       queryParams = JSON.parse(queryParams || "{}");
+      if (options.collectionAddress)
+        queryParams.collectionAddress = String(options.collectionAddress).toLowerCase();
+      if (options.ownerAddress)
+        queryParams.ownerAddress = String(options.ownerAddress).toLowerCase();
 
       const endpoint = queryGetTheGraphEndpoint(graphName);
       const query = queryGetByName(graphName, queryName, queryParams);
-      if (options.collectionAddress) {
-        queryParams.collectionAddress = String(options.collectionAddress).toLowerCase();
-      }
 
-      console.log(await queryTheGraph(endpoint, query, options));
+      console.info(await queryTheGraph(endpoint, query, options));
     });
 
   await program.parseAsync(process.argv);

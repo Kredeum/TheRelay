@@ -1,5 +1,5 @@
 {
-  tokens(first: 5) {
+  tokens(where: { owner: "{{ownerAddress}}" }) {
     id
     chainId
     address

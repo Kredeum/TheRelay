@@ -32,10 +32,10 @@ app.get("/stop", (req, res) => {
 });
 
 app.post("*", async (req, res): Promise<void> => {
-  console.log("POST", req.body);
-  console.log("POST", req);
+  // console.log("POST", req.body);
+  // console.log("POST", req);
 
-  const { query } = req.body as { query: string };
+  const { query, chainId } = req.body as { query: string, chainId?: number };
   if (!query) {
     console.error("ERROR TheRelay no query");
     res.json("no query"); return;
@@ -46,17 +46,17 @@ app.post("*", async (req, res): Promise<void> => {
     console.error("ERROR TheRelay no endpoint");
     res.json("no endpoint"); return;
   }
-  console.log(`TheRelay ${endpoint}\n${query}`);
+  console.info(`TheRelay ${endpoint}\n${query}`);
 
   const json = await queryGraphQL(endpoint, query);
-  console.log("TheGraph", json);
+  // console.log("TheGraph", json);
 
   const { tokens } = JSON.parse(json) as { tokens: Array<TokenType> };
 
-  await addMetadatas(tokens);
+  await addMetadatas(tokens, chainId);
 
   const jsonMetadata = JSON.stringify(tokens, null, "  ");
-  console.log("TheRelay", jsonMetadata);
+  // console.log("TheRelay", jsonMetadata);
 
   res.json(jsonMetadata);
 });
@@ -95,7 +95,7 @@ const theRelayStart = async (): Promise<string> => {
   } else {
     message = THERELAY_STARTING;
     server = app.listen(THERELAY_PORT, () => {
-      console.log(`TheRelay listening on ${THERELAY_URL}`);
+      console.info(`TheRelay listening on ${THERELAY_URL}`);
     });
   }
 

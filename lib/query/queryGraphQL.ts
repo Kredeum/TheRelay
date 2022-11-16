@@ -8,10 +8,9 @@ import { fetchJson } from "@lib/fetch/fetchJson";
 const queryGraphQLResponse = async (endpoint: string, query: string): Promise<QueryGraphQLResponseType> => {
   // console.info(`queryGraphQLResponse ${endpoint}\n${query}`);
 
-  const bquery = query.replace(/[\r\n]/gm, "");
   const config = {
     method: "POST",
-    body: `{ "query" : "${bquery}" }`,
+    body: JSON.stringify({ query }),
     headers: { "Content-type": "application/json" }
   };
 
@@ -24,7 +23,7 @@ const queryGraphQL = async (endpoint: string, query: string, options?: QueryOpti
   if (options?.logs) console.info(`${endpoint}\n${query}`);
 
   const resp = await queryGraphQLResponse(endpoint, query);
-  console.log("queryGraphQL", JSON.stringify(resp, null, "  "));
+  // console.log("queryGraphQL", JSON.stringify(resp, null, "  "));
 
   // if (resp.errors) throw `queryGraphQL ERROR, ${JSON.stringify(resp.errors, null, "  ")}`;
 
