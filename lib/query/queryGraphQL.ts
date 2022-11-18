@@ -3,8 +3,6 @@ import type { QueryGraphQLResponseType, QueryOptionsType } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
 
-
-
 const queryGraphQLResponse = async (endpoint: string, query: string): Promise<QueryGraphQLResponseType> => {
   // console.info(`queryGraphQLResponse ${endpoint}\n${query}`);
 

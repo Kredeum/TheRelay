@@ -12,7 +12,7 @@ import morgan from "morgan";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import cors from "cors";
 import { queryGraphQL } from "@lib/query/queryGraphQL";
-import { addMetadatas, TokenType } from "@lib/metadata/metadataAdd";
+import { metadataAdds, TokenType } from "@lib/metadata/metadataAdd";
 
 
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
@@ -53,7 +53,7 @@ app.post("*", async (req, res): Promise<void> => {
 
   const { tokens } = JSON.parse(json) as { tokens: Array<TokenType> };
 
-  await addMetadatas(tokens, chainId);
+  await metadataAdds(tokens, chainId);
 
   const jsonMetadata = JSON.stringify(tokens, null, "  ");
   // console.log("TheRelay", jsonMetadata);

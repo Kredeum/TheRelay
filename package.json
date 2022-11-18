@@ -1,6 +1,6 @@
 {
-  "name": "express-graphql",
-  "version": "1.0.0",
+  "name": "therelay",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@graphql-tools/schema": "^9.0.8",
+    "@graphql-tools/schema": "^9.0.10",
     "@graphql-yoga/node": "^2.13.13",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
@@ -32,8 +32,8 @@
     "@types/node-fetch": "^2.6.2",
     "@types/object-mapper": "^6.2.0",
     "@types/underscore": "^1.11.4",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.43.0",
     "commander": "^9.4.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -43,16 +43,18 @@
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
     "findup-sync": "^5.0.0",
-    "graphql": "^16.6.0",
+    "graphql": "^15.8.0",
     "graphql-tag": "^2.12.6",
     "handlebars": "^4.7.7",
     "http-server": "^14.1.1",
+    "ipfs-http-client": "^56.0.0",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.0",
-    "typescript": "^4.8.4",
-    "underscore": "^1.13.6"
+    "typescript": "^4.9.3",
+    "underscore": "^1.13.6",
+    "undici": "^5.12.0"
   },
   "dependencies": {
     "morgan": "^1.10.0"

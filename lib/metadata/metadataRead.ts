@@ -1,9 +1,16 @@
 import fs from "fs";
 
 const readMetadata = (address: string, tokenID: string, chainId = 0): unknown => {
-  const metadataFile = `datas/${chainId}/${address}/${tokenID}/metadata.json`;
+  let metadata: unknown = "";
 
-  return fs.existsSync(metadataFile) ? JSON.parse(fs.readFileSync(metadataFile, "utf8")) : "";
+  const dir = `datas/${chainId}/${address}/${tokenID}`;
+
+  if (fs.existsSync(dir)) {
+    const allFiles = fs.readdirSync(dir);
+    if (allFiles.length) metadata = JSON.parse(fs.readFileSync(`${dir}/${allFiles[0]}`, "utf8")) || "";
+  }
+
+  return metadata;
 };
 
 export { readMetadata };

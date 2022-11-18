@@ -8,6 +8,8 @@ import { theRelay } from "@lib/theRelay";
 import { queryGetByName, queryGetByPath, queryGetTheGraphEndpoint } from "@lib/query/queryGet";
 import { queryGraphQL } from "@lib/query/queryGraphQL";
 import { queryTheGraph } from "@lib/query/queryTheGraph";
+import { ipfsCat } from "@lib/ipfs/ipfsCat";
+import { ipfsAdd } from "@lib/ipfs/ipfsAdd";
 
 
 
@@ -15,15 +17,30 @@ const main = async () => {
   const program = new Command();
 
   program
-    .name("query")
+    .name("thequery")
     .description("Query TheGraph with TheRelay")
-    .version("0.0.3");
+    .version("0.0.4");
+
+  const ipfs = program
+    .command("ipfs")
+    .description("IPFS commands");
+
+  ipfs.command("cat")
+    .argument("<cid>", "IPFS CID")
+    .description("Display IPFS CID")
+    .action(async (cid) => (console.log(await ipfsCat(cid))));
+
+  ipfs.command("add")
+    .argument("<buffer>", "buffer")
+    .description("Add buffer to IPFS")
+    .action(async (buffer) => (console.log(await ipfsAdd(buffer))));
 
   program
-    .command("relay")
+    .command("therelay")
     .argument("[cmd]", "start stop status")
     .description("Launch TheRelay")
     .action(async (cmd) => (console.log(await theRelay(cmd))));
+
 
   program
     .command("graphql")
