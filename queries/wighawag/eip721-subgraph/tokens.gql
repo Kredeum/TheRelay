@@ -1,5 +1,5 @@
 {
-  tokens(first: 3, skip: 1000) {
+  tokens(first: 3, skip: 2000) {
     id
     tokenURI
   }
