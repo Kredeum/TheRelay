@@ -1,9 +1,6 @@
 {
-  tokenContract(id: "{{collectionAddress}}") {
+  tokens(first: 3, where: { contract: "{{collectionAddress}}" }) {
     id
-    name
-    numTokens
-    numOwners
-    supportsEIP721Metadata
+    tokenURI
   }
 }

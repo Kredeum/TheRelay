@@ -1,8 +1,8 @@
-import { QueryOptionsType, THERELAY_URL } from "@lib/types";
+import { OptionsType, THERELAY_URL } from "@lib/types";
 import { queryGraphQL } from "@lib/query/queryGraphQL";
 import { queryTheRelay } from "@lib/query/queryTheRelay";
 
-const queryTheGraph = async (endpoint: string, query: string, options?: QueryOptionsType): Promise<unknown> => {
+const queryTheGraph = async (endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
   const relayUrl = options?.relayUrl ? options.relayUrl : (options?.relay ? THERELAY_URL : "");
 
   return relayUrl ?

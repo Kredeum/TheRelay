@@ -39,7 +39,7 @@ For exemple this query :
 }
 ```
 
-send to TheGraph https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph/graphq  
+send to TheGraph https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph
 returns :
 
 ```
@@ -215,23 +215,20 @@ returns :
 
 ## 2. Install
 
-`npm install`
+```
+npm install
+```
 
 ## 3. Run
 
-```
-Usage: thequery [options] [command]
+Scripts are available :
 
-Query TheGraph with TheRelay
+1. to start, stop or get the status of TheRelay dameon
+1. to query TheGraph with or without TheRelay
 
-Options:
-  -V, --version                                             output the version number
-  -h, --help                                                display help for command
+and generic utilities :
 
-Commands:
-  ipfs                                                      IPFS commands
-  therelay [cmd]                                            Launch TheRelay
-  graphql <endpoint> <queryPath> [queryParams]              Query Graphql, query whatever GraphQL service
-  thegraph [options] <graphName> <queryName> [queryParams]  Query TheGraph, transparent mode or via TheRelay proxy (-r)
-  help [command]                                            display help for command
-```
+1. to query GraphQL endpoints in pure GraphQL
+1. to manage IPFS files
+
+Documentation on howto run theses scripts are [available here](./scripts/README.md)

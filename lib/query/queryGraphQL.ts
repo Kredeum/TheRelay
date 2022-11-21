@@ -1,9 +1,9 @@
 import type { RequestInit } from "node-fetch";
-import type { QueryGraphQLResponseType, QueryOptionsType } from "@lib/types";
+import type { GraphQLResponseType, OptionsType } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
 
-const queryGraphQLResponse = async (endpoint: string, query: string): Promise<QueryGraphQLResponseType> => {
+const queryGraphQLResponse = async (endpoint: string, query: string): Promise<GraphQLResponseType> => {
   // console.info(`queryGraphQLResponse ${endpoint}\n${query}`);
 
   const config = {
@@ -12,12 +12,12 @@ const queryGraphQLResponse = async (endpoint: string, query: string): Promise<Qu
     headers: { "Content-type": "application/json" }
   };
 
-  const resp = (await fetchJson(endpoint, config)) as QueryGraphQLResponseType;
+  const resp = (await fetchJson(endpoint, config)) as GraphQLResponseType;
 
   return resp;
 };
 
-const queryGraphQL = async (endpoint: string, query: string, options?: QueryOptionsType): Promise<string> => {
+const queryGraphQL = async (endpoint: string, query: string, options?: OptionsType): Promise<string> => {
   if (options?.logs) console.info(`${endpoint}\n${query}`);
 
   const resp = await queryGraphQLResponse(endpoint, query);
@@ -32,4 +32,4 @@ const queryGraphQL = async (endpoint: string, query: string, options?: QueryOpti
 };
 
 export { queryGraphQL, queryGraphQLResponse };
-export type { QueryGraphQLResponseType };
+export type { GraphQLResponseType };

@@ -1,10 +1,10 @@
 import type { RequestInit } from "node-fetch";
-import { QueryOptionsType, THERELAY_STARTING } from "@lib/types";
+import { OptionsType, THERELAY_STARTING } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
 import { theRelay } from "@lib/theRelay";
 
-const queryTheRelay = async (relayUrl: string, endpoint: string, query: string, options?: QueryOptionsType): Promise<unknown> => {
+const queryTheRelay = async (relayUrl: string, endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
   if (options?.logs) console.info(`${relayUrl} => ${endpoint}\n${query}`);
 
   const config: RequestInit = {
