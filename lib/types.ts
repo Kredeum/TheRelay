@@ -23,9 +23,13 @@ type QueryParamsType = {
 } & ParamsType;
 
 type OptionsType = {
-  relay?: boolean;
-  relayUrl?: string;
-  ipfsUrl?: string;
+  therelay?: boolean;
+  therelayUrl?: string;
+  ipfsHost?: string;
+  ipfsGatewayPort?: string;
+  ipfsGatewayUrl?: string;
+  ipfsApiPort?: string;
+  ipfsApiurl?: string;
   logs?: boolean;
 } & ParamsType;
 

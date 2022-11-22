@@ -2,16 +2,12 @@
 import { OptionsType } from "@lib/types";
 import { create } from "ipfs-http-client";
 
-const ipfsAdd = async (buffer: string, options?: OptionsType): Promise<string> => {
-  let host = "127.0.0.1";
-  let port = 5001;
+const ipfsAdd = async (buffer: string, options: OptionsType = {}): Promise<string> => {
+  const url = options?.ipfsApiurl ? new URL(options?.ipfsApiurl) : { host: "127.0.0.1", port: 5001 };
 
-  if (options?.ipfsUrl) {
-    const url = new URL(options?.ipfsUrl);
-    host = url.host;
-    port = Number(url.port);
-  }
-
+  const host = options.ipfsHost || url.host;
+  const port = Number(options.ipfsApiPort || url.port);
+  console.log("ipfsAdd { host, port }", host, port);
 
   const ipfs = create({ host, port });
   const { cid } = await ipfs.add(buffer);

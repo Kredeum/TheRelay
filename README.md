@@ -28,7 +28,7 @@ When "File Data Sources" will be deployed to TheGraph, this will be also possibl
 
 'wighawag/eip721-subgraph' will be used as the reference subgraph to query
 
-For exemple this query :
+For exemple this query
 
 ```
 {
@@ -39,7 +39,12 @@ For exemple this query :
 }
 ```
 
-send to TheGraph https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph
+sent to TheGraph at this endpoint :
+
+```
+https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph
+```
+
 returns :
 
 ```
@@ -59,9 +64,17 @@ returns :
     }
   ]
 }
+
 ```
 
-send to TheRelay http:127.0.0.1:8080/subgraphs/name/wighawag/eip721-subgraph/graphq  
+Try it with `pnpm thequery wighawag/eip721-subgraph tokens`
+
+Same query sent to TheRelay
+
+```
+ http:127.0.0.1:8080/subgraphs/name/wighawag/eip721-subgraph/graphq
+```
+
 returns :
 
 ```
@@ -213,10 +226,16 @@ returns :
 ]
 ```
 
+Try it with `pnpm thequery wighawag/eip721-subgraph tokens --therelay`
+
 ## 2. Install
 
+_Pre-requirement:_ node v16 or v18
+
 ```
+
 npm install
+
 ```
 
 ## 3. Run
@@ -232,3 +251,7 @@ and generic utilities :
 1. to manage IPFS files
 
 Documentation on howto run theses scripts are [available here](./scripts/README.md)
+
+```
+
+```

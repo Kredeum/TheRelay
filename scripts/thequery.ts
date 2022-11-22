@@ -15,8 +15,8 @@ const main = async () => {
     .argument("<queryName>", "query name")
     .argument("[queryParams]", "query params")
     .option("-l , --logs", "display query request")
-    .option("-r, --relay", "embedded relay")
-    .option("-u, --relayUrl <string>", "remote relay url")
+    .option("-r, --therelay", "embedded relay")
+    .option("-u, --therelay-url <string>", "remote relay url")
     .option("-c, --collection-address <string>", "collection address")
     .option("-o, --owner-address <string>", "owner address")
     .action(async (graphName: string, queryName: string, queryParams: ParamsType, options: OptionsType) => {

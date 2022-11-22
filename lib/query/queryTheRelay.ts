@@ -4,8 +4,8 @@ import { OptionsType, THERELAY_STARTING } from "@lib/types";
 import { fetchJson } from "@lib/fetch/fetchJson";
 import { theRelay } from "@lib/theRelay";
 
-const queryTheRelay = async (relayUrl: string, endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
-  if (options?.logs) console.info(`${relayUrl} => ${endpoint}\n${query}`);
+const queryTheRelay = async (theRelayUrl: string, endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
+  if (options?.logs) console.info(`${theRelayUrl} => ${endpoint}\n${query}`);
 
   const config: RequestInit = {
     method: "POST",
@@ -17,11 +17,11 @@ const queryTheRelay = async (relayUrl: string, endpoint: string, query: string, 
 
   // console.log("queryTheRelay", config);
 
-  const url = `${relayUrl}/${endpoint}`;
+  const url = `${theRelayUrl}/${endpoint}`;
   // console.log("queryTheRelay", url);
 
   let status = "";
-  if (options?.relay) status = await theRelay("start");
+  if (options?.therelay) status = await theRelay("start");
 
   const json = await fetchJson(url, config);
 

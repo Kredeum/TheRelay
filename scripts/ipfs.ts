@@ -14,13 +14,17 @@ const main = async () => {
   program.command("cat")
     .argument("<cid>", "IPFS CID to retreive from IPFS")
     .description("Display IPFS CID")
-    .option("-a, --ipfs-api <string>", "ipfs url, default http://127.0.0.1:8081/ipfs")
+    .option("-h, --ipfs-host <string>", "ipfs host, default 127.0.0.1")
+    .option("-p, --ipfs-gateway-port <string>", "ipfs gateway port, default 8080")
+    .option("-u, --ipfs-gateway-url <string>", "ipfs gateway url, default http://127.0.0.1:8080")
     .action(async (cid: string, options: OptionsType) => (console.log(await ipfsCat(cid, options))));
 
   program.command("add")
     .argument("<buffer>", "buffer to add to IPFS")
     .description("Add buffer to IPFS")
-    .option("-g, --ipfs-gateway-url <string>", "ipfs url, default http://127.0.0.1:5001")
+    .option("-h, --ipfs-host <string>", "ipfs host, default 127.0.0.1")
+    .option("-p, --ipfs-api-port <string>", "ipfs api port, default 5001")
+    .option("-u, --ipfs-api-url <string>", "ipfs api url, default http://127.0.0.1:5001")
     .action(async (buffer: string, options: OptionsType) => (console.log(await ipfsAdd(buffer, options))));
 
   await program.parseAsync(process.argv);

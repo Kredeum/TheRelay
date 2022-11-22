@@ -8,6 +8,7 @@ const main = async () => {
   const program = new Command();
 
   program
+    .name("therelay")
     .description("Manage TheRelay daemon");
 
   program
