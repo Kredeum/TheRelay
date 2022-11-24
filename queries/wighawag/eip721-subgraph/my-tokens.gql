@@ -1,6 +1,0 @@
-{
-  tokens(first: 9, where: { owner: "{{ownerAddress}}" }) {
-    id
-    tokenURI
-  }
-}

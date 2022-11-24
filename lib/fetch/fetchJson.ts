@@ -7,7 +7,7 @@ type FetchResponse = {
 };
 
 const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): Promise<FetchResponse> => {
-  // console.log(`fetchJson\n${url}`);
+  // console.log(`fetchJson ${url}`);
   // console.log(config);
 
   let json: FetchResponse;
@@ -20,7 +20,7 @@ const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): 
     console.error("fetchJson ERROR", e, url, config);
   }
 
-  // console.log("fetchJson", json);
+  // console.log(`fetchJson ${url}`, JSON.stringify(json, null, 2));
   return json;
 };
 

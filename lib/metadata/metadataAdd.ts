@@ -37,7 +37,7 @@ const metadataAdd = async (token: TokenType, chainId = 1): Promise<void> => {
   }
 };
 
-const metadataAdds = async (tokens: Array<TokenType>, chainId = 0): Promise<void> => {
+const metadataAdds = async (tokens: Array<TokenType> = [], chainId = 0): Promise<void> => {
   for (const token of tokens) await metadataAdd(token, chainId);
 };
 

@@ -27,7 +27,7 @@ pnpm therelay status
 Usage :
 
 ```
-pnpm thequery [options] <graphName> <queryName> [queryParams]
+pnpm thequery [options] <graphName> <queryName> [queryVariables]
 ```
 
 Query example without TheRelay :
@@ -60,7 +60,7 @@ To be used in test environment only_
 Usage :
 
 ```
-pnpm graphql [options] <endpoint> <queryPath> [queryParams]
+pnpm graphql [options] <endpoint> <queryPath> [queryVariables]
 ```
 
 Query example :

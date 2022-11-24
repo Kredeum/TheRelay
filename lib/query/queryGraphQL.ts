@@ -1,4 +1,3 @@
-import type { RequestInit } from "node-fetch";
 import type { GraphQLResponseType, OptionsType } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";

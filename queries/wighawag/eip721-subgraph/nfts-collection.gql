@@ -1,0 +1,5 @@
+{
+  nfts: tokens(first: {{first}}, skip: {{skip}}, where: { contract: "{{collectionAddress}}" }) {
+    ...NftFields
+  }
+}

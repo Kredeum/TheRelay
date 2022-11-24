@@ -1,0 +1,11 @@
+{
+  ownerPerTokenContracts (
+    where: { numTokens_gt: "0",owner: "{{ownerAddress}}" }
+    ) {
+      owner {
+        nfts: tokens {{filterNfts}} {
+          ...NftFields
+        }
+      }
+  }
+}

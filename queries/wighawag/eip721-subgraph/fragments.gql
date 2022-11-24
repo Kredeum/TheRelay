@@ -1,0 +1,21 @@
+fragment NftFields on Token {
+  id
+  address: contract {
+    id
+  }
+  owner {
+    id
+  }
+  tokenID
+  collection: contract {
+    ...Collection
+  }
+  tokenURI
+}
+
+fragment Collection on TokenContract {
+  id
+  name
+  symbol
+  totalSupply: numTokens
+}

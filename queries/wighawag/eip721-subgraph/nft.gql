@@ -1,0 +1,5 @@
+{
+  nft: token(id: "{{collectionAddress}}_{{tokenId}}") {
+    ...NftFields
+  }
+}

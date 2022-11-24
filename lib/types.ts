@@ -13,14 +13,25 @@ const THEGRAPH_BASE_API = "https://api.thegraph.com";
 const THEGRAPH_BASE_ENDPOINT = `${THEGRAPH_BASE_API}/subgraphs/name`;
 
 type ParamsType = {
+  first?: string;
+  skip?: string;
   collectionAddress?: string;
   ownerAddress?: string;
+  tokenId?: string;
 }
 
-type QueryParamsType = {
+type QueryVariablesType = {
+  whereNfts?: string;
+  whereCollections?: string;
+  filterNfts?: string;
+  filterCollections?: string;
+} & ParamsType;
+
+type QueryType = {
   endpoint: string;
   queryPath: string;
-} & ParamsType;
+  queryVariables: QueryVariablesType;
+}
 
 type OptionsType = {
   therelay?: boolean;
@@ -29,8 +40,9 @@ type OptionsType = {
   ipfsGatewayPort?: string;
   ipfsGatewayUrl?: string;
   ipfsApiPort?: string;
-  ipfsApiurl?: string;
+  ipfsApiUrl?: string;
   logs?: boolean;
+
 } & ParamsType;
 
 
@@ -44,4 +56,4 @@ export {
   THERELAY_PROTOCOL, THERELAY_DOMAIN, THERELAY_PORT, THERELAY_URL,
   THERELAY_RUNNING, THERELAY_STOPPING, THERELAY_STOPPED, THERELAY_ERROR, THERELAY_STARTING
 };
-export type { ParamsType, QueryParamsType, OptionsType, GraphQLResponseType };
+export type { QueryType, ParamsType, QueryVariablesType, OptionsType, GraphQLResponseType };

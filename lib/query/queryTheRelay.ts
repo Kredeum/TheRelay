@@ -17,7 +17,7 @@ const queryTheRelay = async (theRelayUrl: string, endpoint: string, query: strin
 
   // console.log("queryTheRelay", config);
 
-  const url = `${theRelayUrl}/${endpoint}`;
+  const url = `${theRelayUrl}/${endpoint.replace("https://", "")}`;
   // console.log("queryTheRelay", url);
 
   let status = "";

@@ -8,11 +8,11 @@ const main = () => {
   }`;
   console.log("queryRaw", queryRaw);
 
-  const queryParams = { tokenAddress: "0x42" };
-  console.log("queryParams", queryParams);
+  const queryVariables = { tokenAddress: "0x42" };
+  console.log("queryVariables", queryVariables);
 
   const template = Handlebars.compile(queryRaw);
-  const query = template(queryParams);
+  const query = template(queryVariables);
 
   console.log("query", query);
 };

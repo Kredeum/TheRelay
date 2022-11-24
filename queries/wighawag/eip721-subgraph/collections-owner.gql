@@ -1,0 +1,8 @@
+{
+  collections: ownerPerTokenContracts(where: { owner: "{{ownerAddress}}" }) {
+    collection: contract {
+      ...Collection
+    }
+    balanceOf: numTokens
+  }
+}

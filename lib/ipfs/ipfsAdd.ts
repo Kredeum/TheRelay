@@ -3,7 +3,9 @@ import { OptionsType } from "@lib/types";
 import { create } from "ipfs-http-client";
 
 const ipfsAdd = async (buffer: string, options: OptionsType = {}): Promise<string> => {
-  const url = options?.ipfsApiurl ? new URL(options?.ipfsApiurl) : { host: "127.0.0.1", port: 5001 };
+  const url = options?.ipfsApiUrl ? new URL(options?.ipfsApiUrl) : { host: "127.0.0.1", port: 5001 };
+  // console.log("ipfsAdd ~ url", url);
+  // console.log("ipfsAdd ~ options", options);
 
   const host = options.ipfsHost || url.host;
   const port = Number(options.ipfsApiPort || url.port);

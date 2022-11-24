@@ -41,21 +41,23 @@ app.post("*", async (req, res): Promise<void> => {
     res.json("no query"); return;
   }
 
-  const endpoint = req.path.slice(1);
+  const endpoint = `https:/${req.path}`;
   if (!endpoint) {
     console.error("ERROR TheRelay no endpoint");
     res.json("no endpoint"); return;
   }
-  console.info(`TheRelay ${endpoint}\n${query}`);
+  // console.log(`TheRelay ${endpoint}`);
+  // console.log(query);
 
   const json = await queryGraphQL(endpoint, query);
   // console.log("TheGraph", json);
 
-  const { tokens } = JSON.parse(json) as { tokens: Array<TokenType> };
+  const { nfts } = JSON.parse(json) as { nfts: Array<TokenType> };
+  // console.log("app.post ~ nfts", nfts);
 
-  await metadataAdds(tokens, chainId);
+  await metadataAdds(nfts, chainId);
 
-  const jsonMetadata = JSON.stringify(tokens, null, "  ");
+  const jsonMetadata = JSON.stringify(nfts, null, "  ");
   // console.log("TheRelay", jsonMetadata);
 
   res.json(jsonMetadata);
