@@ -60,7 +60,7 @@ const queryGetVariables = (options: OptionsType): QueryVariablesType => {
     queryVariables.filterCollections = `( ${filterCollections.join(", ")} )`;
   }
 
-  console.log("queryGetVariables", queryVariables);
+  // console.log("queryGetVariables", queryVariables);
   return queryVariables;
 };
 

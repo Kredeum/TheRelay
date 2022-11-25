@@ -1,16 +1,14 @@
-const THERELAY_PROTOCOL = "http";
-const THERELAY_DOMAIN = "127.0.0.1";
-const THERELAY_PORT = 4004;
-const THERELAY_URL = `${THERELAY_PROTOCOL}://${THERELAY_DOMAIN}:${THERELAY_PORT}`;
+// const THERELAY_URL = process.env.THERELAY_URL || "http://therelay.kredeum.com";
+// const THERELAY_PORT = process.env.THERELAY_PORT || 80;
+
+const THERELAY_URL = process.env.THERELAY_URL || "http://127.0.0.1:4004";
+const THERELAY_PORT = process.env.THERELAY_PORT || 4004;
 
 const THERELAY_RUNNING = "RUNNING";
 const THERELAY_STOPPING = "STOPPING";
 const THERELAY_STOPPED = "STOPPED";
 const THERELAY_ERROR = "ERROR";
 const THERELAY_STARTING = "STARTING";
-
-const THEGRAPH_BASE_API = "https://api.thegraph.com";
-const THEGRAPH_BASE_ENDPOINT = `${THEGRAPH_BASE_API}/subgraphs/name`;
 
 type ParamsType = {
   first?: string;
@@ -52,8 +50,7 @@ type GraphQLResponseType = {
 };
 
 export {
-  THEGRAPH_BASE_ENDPOINT,
-  THERELAY_PROTOCOL, THERELAY_DOMAIN, THERELAY_PORT, THERELAY_URL,
+  THERELAY_PORT, THERELAY_URL,
   THERELAY_RUNNING, THERELAY_STOPPING, THERELAY_STOPPED, THERELAY_ERROR, THERELAY_STARTING
 };
 export type { QueryType, ParamsType, QueryVariablesType, OptionsType, GraphQLResponseType };

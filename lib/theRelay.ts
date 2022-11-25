@@ -46,9 +46,9 @@ app.post("*", async (req, res): Promise<void> => {
     console.error("ERROR TheRelay no endpoint");
     res.json("no endpoint"); return;
   }
-  // console.log(`TheRelay ${endpoint}`);
   // console.log(query);
 
+  console.log(`FETCH ${endpoint}`);
   const json = await queryGraphQL(endpoint, query);
   // console.log("TheGraph", json);
 
@@ -104,10 +104,10 @@ const theRelayStart = async (): Promise<string> => {
   return message;
 };
 
-const theRelay = async (cmd: string): Promise<string> => {
-  return ((cmd == "stop") ? await theRelayStop() :
+const theRelay = async (cmd: string): Promise<string> =>
+
+  ((cmd == "stop") ? await theRelayStop() :
     ((cmd == "status") ? await theRelayStatus() :
-      await theRelayStart()));
-};
+      await theRelayStart())) + " " + THERELAY_URL;
 
 export { theRelay };

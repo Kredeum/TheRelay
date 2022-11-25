@@ -1,7 +1,6 @@
 import Handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
-import { THEGRAPH_BASE_ENDPOINT } from "@lib/types";
 
 const queryGetPreprocessed = (query: string, queryVariables = {}): string =>
   Handlebars.compile(query, { noEscape: true })(queryVariables);
@@ -37,7 +36,7 @@ const queryGetTheGraphEndpoint = (graphName: string): string => {
 
   const endpoint = (queryGetSubgraphDescription(graphName) as { endpoint: string }).endpoint;
 
-  return endpoint || `${THEGRAPH_BASE_ENDPOINT}/${graphName}`;
+  return endpoint;
 };
 
 export {

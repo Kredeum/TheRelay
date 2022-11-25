@@ -9,12 +9,15 @@ const ipfsAdd = async (buffer: string, options: OptionsType = {}): Promise<strin
 
   const host = options.ipfsHost || url.host;
   const port = Number(options.ipfsApiPort || url.port);
-  console.log("ipfsAdd { host, port }", host, port);
+  // console.log(`ipfsAdd { ${host}, ${port} }`);
 
   const ipfs = create({ host, port });
   const { cid } = await ipfs.add(buffer);
 
-  return String(cid.toV1());
+  const cidV1 = String(cid.toV1());
+  console.log("IPFS add", cidV1);
+
+  return cidV1;
 };
 
 export { ipfsAdd };

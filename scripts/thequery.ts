@@ -17,7 +17,7 @@ const main = async () => {
     .description("Query TheGraph, transparent mode or via TheRelay proxy (-r)")
     .argument("<graphName>", "subgraph name")
     .argument("<queryName>", "query name")
-    .option("-l , --logs", "display query request", true)
+    .option("-l , --logs", "display query request", false)
     .option("-r, --therelay", "use local relay, automaticaly launched", false)
     .option("-u, --therelay-url <string>", "use remote relay, on this url", false)
     .option("-o, --owner-address <string>", "filter on this owner address")

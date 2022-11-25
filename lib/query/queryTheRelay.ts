@@ -5,7 +5,7 @@ import { fetchJson } from "@lib/fetch/fetchJson";
 import { theRelay } from "@lib/theRelay";
 
 const queryTheRelay = async (theRelayUrl: string, endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
-  if (options?.logs) console.info(`${theRelayUrl} => ${endpoint}\n${query}`);
+  if (options?.logs) console.info(`${endpoint}\n${query}`);
 
   const config: RequestInit = {
     method: "POST",
