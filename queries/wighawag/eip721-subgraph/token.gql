@@ -1,0 +1,6 @@
+{
+  nfts: tokens(first: 1, skip: 2000) {
+    id
+    tokenURI
+  }
+}

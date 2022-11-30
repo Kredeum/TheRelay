@@ -1,8 +1,5 @@
-// const THERELAY_URL = process.env.THERELAY_URL || "http://therelay.kredeum.com";
-// const THERELAY_PORT = process.env.THERELAY_PORT || 80;
-
-const THERELAY_URL = process.env.THERELAY_URL || "http://127.0.0.1:4004";
-const THERELAY_PORT = process.env.THERELAY_PORT || 4004;
+const THERELAY_URL_DEFAULT = "http://127.0.0.1:4004";
+const THERELAY_URL = process.env.THERELAY_URL || THERELAY_URL_DEFAULT;
 
 const THERELAY_RUNNING = "RUNNING";
 const THERELAY_STOPPING = "STOPPING";
@@ -50,7 +47,7 @@ type GraphQLResponseType = {
 };
 
 export {
-  THERELAY_PORT, THERELAY_URL,
+  THERELAY_URL, THERELAY_URL_DEFAULT,
   THERELAY_RUNNING, THERELAY_STOPPING, THERELAY_STOPPED, THERELAY_ERROR, THERELAY_STARTING
 };
 export type { QueryType, ParamsType, QueryVariablesType, OptionsType, GraphQLResponseType };

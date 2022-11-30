@@ -3,7 +3,7 @@ import type { Response } from "node-fetch";
 
 import express from "express";
 import {
-  THERELAY_PORT, THERELAY_URL, THERELAY_RUNNING, THERELAY_STOPPING,
+  THERELAY_URL, THERELAY_RUNNING, THERELAY_STOPPING,
   THERELAY_STOPPED, THERELAY_STARTING
 } from "@lib/types";
 import fetch from "node-fetch";
@@ -91,12 +91,13 @@ const theRelayStop = async (): Promise<string> => {
 
 const theRelayStart = async (): Promise<string> => {
   let message = "";
+  const theRelayPort = new URL(THERELAY_URL).port;
 
   if (await theRelayStatus() == THERELAY_RUNNING) {
     message = `ALREADY ${THERELAY_RUNNING}`;
   } else {
     message = THERELAY_STARTING;
-    server = app.listen(THERELAY_PORT, () => {
+    server = app.listen(theRelayPort, () => {
       console.info(`TheRelay listening on ${THERELAY_URL}`);
     });
   }
