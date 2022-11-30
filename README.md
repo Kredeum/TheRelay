@@ -2,7 +2,7 @@
 
 ### Purpose
 
-The objective of TheRelay is to enrich subgraph NFT queries with metadata
+The objective of TheRelay is to enrich TheGraph NFT queries with metadata
 
 ### Problem
 
@@ -129,11 +129,14 @@ You can replay it with `pnpm thequery wighawag/eip721-subgraph token --therelay`
 #### Available
 
 - TheRelay : service acting as json proxy retreiving json answers from TheGraph and adding NFT metadata
-  - on each query, metadata saved to IPFS (when available)
-  - on each query, metadata saved to filesystem
-  - on each query, metadata read from IPFS or filesystem
+  - on each NFT query, on each NFT retrieved :
+    - NFT metadata read from IPFS (or filesystem) if available
+    - else metadata fetched from the tokenURI
+    - then saved to filesystem
+    - and saved to IPFS if available
   - start/stop/status commands available
-  - can be run as a daemon or inside TheQuery client, on local desktop or remote server
+  - can be run as a daemon or inside TheQuery client
+  - can be run on local desktop or remote server
 - TheQuery : cli framework
   - TheGraph NFT queries : with both [wighawag](https://github.com/wighawag/eip721-subgraph/blob/master/schema.graphql) and [amxx](https://github.com/OpenZeppelin/openzeppelin-subgraphs/blob/main/generated/erc721.schema.graphql) NFT schemas
   - TheGraph NFT queries enriched with metadata via TheRelay (for both NFT schemas)
@@ -146,7 +149,7 @@ You can replay it with `pnpm thequery wighawag/eip721-subgraph token --therelay`
 - TheRelay
   - manage fetching / json errors
   - manage inline metadata
-  - setup a stable remote server, with https
+  - setup a stable remote server, with https, with IPFS pinning service
   - transform TheRelay from a json relay to a real graphQL relay (then accessible via [GraphiQL](https://github.com/graphql/graphiql/tree/main/packages/graphiql))
 - TheQuery
   - full support of ENV parameters
@@ -157,7 +160,3 @@ You can replay it with `pnpm thequery wighawag/eip721-subgraph token --therelay`
 ### Usage
 
 **Full documentation on [this page](./scripts/README.md)**
-
-```
-
-```

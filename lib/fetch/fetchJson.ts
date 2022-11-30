@@ -7,7 +7,7 @@ type FetchResponse = {
 };
 
 const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): Promise<FetchResponse> => {
-  // console.log(`fetchJson ${url}`);
+  console.info(`FETCH JSON ${url}`);
   // console.log(config);
 
   let json: FetchResponse;

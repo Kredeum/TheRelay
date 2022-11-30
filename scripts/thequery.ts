@@ -3,7 +3,6 @@
 import { Command } from "commander";
 
 import type { OptionsType } from "@lib/types";
-import { THERELAY_URL_DEFAULT } from "@lib/types";
 
 import { queryGetByName, queryGetTheGraphEndpoint } from "@lib/query/queryGet";
 import { queryGetVariables } from "@lib/query/queryGetVariables";
@@ -20,7 +19,7 @@ const main = async () => {
     .argument("<queryName>", "query name")
     .option("-l , --logs", "display query request", false)
     .option("-r, --therelay", "use local relay, automaticaly launched", false)
-    .option("-u, --therelay-url <string>", "points to relay url", THERELAY_URL_DEFAULT)
+    .option("-u, --therelay-url <string>", "points to relay url", "")
     .option("-o, --owner-address <string>", "filter on this owner address")
     .option("-c, --collection-address <string>", "filter on this collection address")
     .option("-t, --token-id <string>", "filter on this token ID")

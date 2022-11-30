@@ -3,7 +3,7 @@ import type { RequestInit } from "node-fetch";
 import fetch from "node-fetch";
 
 const fetchText = async (url: string, config: RequestInit = { method: "GET" }): Promise<string> => {
-  // console.log(`fetchText\n${url}`);
+  console.info(`FETCH TEXT ${url}`);
   // console.log(config);
   // console.log(config.body);
 

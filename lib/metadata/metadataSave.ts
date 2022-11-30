@@ -2,6 +2,11 @@ import fs from "fs";
 import { ipfsAdd } from "@lib/ipfs/ipfsAdd";
 
 const metadataSaveToFile = (json: string, cid: string, address: string, tokenID: string, chainId = 0): void => {
+  if (!(json && cid && address && tokenID)) {
+    console.error(`FILE ADD ERROR : ${cid} ${chainId} ${address} ${tokenID}`, json);
+    return;
+  }
+
   const tokenDir = `datas/${chainId}/${address}/${tokenID}`;
   fs.mkdirSync(tokenDir, { recursive: true });
   fs.writeFileSync(`${tokenDir}/${cid}`, json, "utf8");
@@ -9,6 +14,8 @@ const metadataSaveToFile = (json: string, cid: string, address: string, tokenID:
   const ipfsDir = "datas/ipfs";
   fs.mkdirSync(ipfsDir, { recursive: true });
   fs.writeFileSync(`${ipfsDir}/${cid}`, json, "utf8");
+
+  console.info("FILE ADD", cid);
 };
 
 const metadataSaveToIpfs = ipfsAdd;

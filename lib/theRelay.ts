@@ -14,13 +14,16 @@ import cors from "cors";
 import { queryGraphQL } from "@lib/query/queryGraphQL";
 import { metadataAdds, TokenType } from "@lib/metadata/metadataAdd";
 
-
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
 
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+
+
+
+
 
 app.get("/info", (req, res) => (res.send("NFT IPFS RELAY")));
 app.get("/status", (req, res) => (res.send(THERELAY_RUNNING)));
@@ -48,7 +51,6 @@ app.post("*", async (req, res): Promise<void> => {
   }
   // console.log(query);
 
-  console.log(`FETCH ${endpoint}`);
   const json = await queryGraphQL(endpoint, query);
   // console.log("TheGraph", json);
 
@@ -62,7 +64,6 @@ app.post("*", async (req, res): Promise<void> => {
 
   res.json(jsonMetadata);
 });
-
 
 const theRelayStatus = async (): Promise<string> => {
   let message = "";
@@ -105,10 +106,12 @@ const theRelayStart = async (): Promise<string> => {
   return message;
 };
 
-const theRelay = async (cmd: string): Promise<string> =>
+const theRelay = async (cmd: string): Promise<string> => {
+  if (cmd == "stop") return await theRelayStop();
+  if (cmd == "status") return await theRelayStatus();
+  if (cmd == "start") return await theRelayStart();
+  return "Unknown command";
+};
 
-  ((cmd == "stop") ? await theRelayStop() :
-    ((cmd == "status") ? await theRelayStatus() :
-      await theRelayStart())) + " " + THERELAY_URL;
 
-export { theRelay };
+export { theRelay, theRelayStatus };
