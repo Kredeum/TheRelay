@@ -33,13 +33,20 @@ Usage: pnpm therelay [options] [command]
 Manage TheRelay daemon
 
 Options:
-  -h, --help      display help for command
+  -v , --verbose               add traces (default: false)
+  -r, --therelay-url <string>  therelay url (default: "http://127.0.0.1:4004")
+  -n, --no-ipfs                do not save metadata to IPFS
+  -m, --no-save                do not save metadata to filesystem
+  -u, --ipfs-url <string>      ipfs url (default: "http://127.0.0.1")
+  -i, --ipfs-api <string>      ipfs api port or full url (default: "5001")
+  -g, --ipfs-gateway <string>  ipfs gateway port or full url (default: "8080")
+  -h, --help                   display help for command
 
 Commands:
-  start           Start TheRelay daemon
-  stop            Stop TheRelay daemon
-  status          Get TheRelay Status
-  help [command]  display help for command
+  start                        Start TheRelay daemon
+  stop                         Stop TheRelay daemon
+  status                       Get TheRelay Status
+  help [command]               display help for command
 ```
 
 _TheRelay can also be automatically launched on your local machine on each query, in this case you will not need these commands_
@@ -62,13 +69,14 @@ Arguments:
   queryName                          query name
 
 Options:
-  -l , --logs                        display query request (default: false)
+  -v , --verbose                     add traces (default: false)
   -r, --therelay                     use local relay, automaticaly launched (default: false)
-  -u, --therelay-url <string>        use remote relay, on this url (default: http://127.0.0.1:4004)
-  -o, --owner-address <string>       filter this owner address
-  -c, --collection-address <string>  filter this collection address
-  -t, --token-id <string>            filter this token ID
-  -f, --first <number>               limit results
+  -u, --therelay-url <string>        points to relay url (default: "http://127.0.0.1:4004")
+  -o, --owner-address <string>       owner address
+  -n, --chain-id <string>            network chainId
+  -c, --collection-address <string>  collection address
+  -t, --token-id <string>            token ID
+  -f, --first <number>               limit to first results
   -s, --skip <number>                skip results
   -h, --help                         display help for command
 ```
@@ -91,38 +99,16 @@ Default local relay is http://127.0.0.1:4004 (launched for the time of the query
 Query examples with parameters :
 
 ```
-pnpm thequery wighawag/eip721-subgraph my-tokens --owner-address 0xa6d856e4e9b1d12f42687bcacd691ba48008d6c3 --logs
+pnpm thequery wighawag/eip721-subgraph my-tokens --owner-address 0xa6d856e4e9b1d12f42687bcacd691ba48008d6c3 --verbose
 ```
 
 ```
 pnpm thequery wighawag/eip721-subgraph collection --collection-address 0x00000000001ba87a34f0d3224286643b36646d81 -r
 ```
 
-### GraphQL generic utility
-
-```
-Usage: pnpm graphql [options] <endpoint> <queryPath> [queryVariables]
-
-Query Graphql, query whatever GraphQL service
-
-Arguments:
-  endpoint        endpoint url
-  queryPath       query path
-  queryVariables  query params
-
-Options:
-  -h, --help      display help for command
-```
-
-Query example :
-
-```
-pnpm graphql https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph wighawag/eip721-subgraph/tokens
-```
-
 ### IPFS generic utility
 
-_To run these command you should have a IPFS server running locally or remotely_
+_To run IFPS command you should have a IPFS server running locally or remotely_
 
 ```
 Usage: pnpm ipfs [options] [command]
@@ -130,12 +116,18 @@ Usage: pnpm ipfs [options] [command]
 IPFS commands
 
 Options:
-  -h, --help              display help for command
+  -v , --verbose               add traces (default: false)
+  -i, --ipfs-url <string>      ipfs url (default: "http://127.0.0.1")
+  -a, --ipfs-api <string>      ipfs api port or full url (default: "5001")
+  -g, --ipfs-gateway <string>  ipfs gateway port or full url (default: "8080")
+  -h, --help                   display help for command
 
 Commands:
-  cat [options] <cid>     Display IPFS CID
-  add [options] <buffer>  Add buffer to IPFS
-  help [command]          display help for command
+  cat <cid>                    Display IPFS CID
+  add <buffer>                 Add buffer to IPFS
+  version
+  status
+  help [command]               display help for command
 ```
 
 Add to IPFS example :
@@ -148,4 +140,26 @@ Get from IPFS example :
 
 ```
 pnpm ipfs cat bafybeidg3zkcudh4mvpaevcy3ezdmzsxuel6jgshl4rsu2h35672t3blvm
+```
+
+### GraphQL generic utility
+
+```
+Usage: pnpm graphql [options] <endpoint> <queryPath> [queryParams]
+
+Query Graphql, query whatever GraphQL service
+
+Arguments:
+  endpoint     endpoint url
+  queryPath    query path
+  queryParams  query params
+
+Options:
+  -h, --help   display help for command
+```
+
+Query example :
+
+```
+pnpm graphql https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph wighawag/eip721-subgraph/tokens
 ```

@@ -1,12 +1,13 @@
 import Handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
+import { TheQueryVariablesType } from "@lib/types";
 
-const queryGetPreprocessed = (query: string, queryVariables = {}): string =>
+const queryGetPreprocessed = (query: string, queryVariables: TheQueryVariablesType): string =>
   Handlebars.compile(query, { noEscape: true })(queryVariables);
 
 
-const queryGetByFile = (queryFile: string, queryVariables = {}): string => {
+const queryGetByFile = (queryFile: string, queryVariables: TheQueryVariablesType): string => {
   if (!fs.existsSync(queryFile)) throw `Query file '${queryFile}' does not exists!`;
 
   const fragmentsFile = `${path.dirname(queryFile)}/fragments.gql`;
@@ -25,7 +26,7 @@ const queryGetSubgraphDescription = (graphName: string): unknown => {
   return JSON.parse(descriptionJson) as unknown;
 };
 
-const queryGetByPath = (queryPath: string, queryVariables = {}): string =>
+const queryGetByPath = (queryPath: string, queryVariables: TheQueryVariablesType): string =>
   queryGetByFile(`queries/${queryPath}.gql`, queryVariables);
 
 const queryGetByName = (graphName: string, queryName: string, queryVariables = {}): string =>

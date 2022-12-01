@@ -4,7 +4,7 @@ import type { Response } from "node-fetch";
 import express from "express";
 import {
   THERELAY_URL, THERELAY_RUNNING, THERELAY_STOPPING,
-  THERELAY_STOPPED, THERELAY_STARTING
+  THERELAY_STOPPED, THERELAY_STARTING, THERELAY_ERROR, TheRelayParamsType
 } from "@lib/types";
 import fetch from "node-fetch";
 import morgan from "morgan";
@@ -16,37 +16,41 @@ import { metadataAdds, TokenType } from "@lib/metadata/metadataAdd";
 
 let server: Server<typeof IncomingMessage, typeof ServerResponse>;
 
+let theRelayParams: TheRelayParamsType;
+
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-
-
-
-
 app.get("/info", (req, res) => (res.send("NFT IPFS RELAY")));
-app.get("/status", (req, res) => (res.send(THERELAY_RUNNING)));
+app.get("/status", (req, res) => {
+  if (theRelayParams.verbose) console.info(JSON.stringify(theRelayParams, null, 2));
+
+  res.send(THERELAY_RUNNING);
+});
+
 app.post("/query", (req, res) => (res.json(req.body)));
 
 app.get("/stop", (req, res) => {
+  if (theRelayParams.verbose) console.info(THERELAY_STOPPING);
+
   res.send(THERELAY_STOPPING);
   server.close();
 });
 
 app.post("*", async (req, res): Promise<void> => {
-  // console.log("POST", req.body);
-  // console.log("POST", req);
+  const { query, chainId } = req.body as { query: string, originalUrl: string, chainId?: number };
+  if (theRelayParams.verbose) console.info(`POST ${req.path}\n${query}`);
 
-  const { query, chainId } = req.body as { query: string, chainId?: number };
   if (!query) {
-    console.error("ERROR TheRelay no query");
+    console.error(`${THERELAY_ERROR} no query`);
     res.json("no query"); return;
   }
 
   const endpoint = `https:/${req.path}`;
   if (!endpoint) {
-    console.error("ERROR TheRelay no endpoint");
+    console.error(`${THERELAY_ERROR} no endpoint`);
     res.json("no endpoint"); return;
   }
   // console.log(query);
@@ -73,7 +77,6 @@ const theRelayStatus = async (): Promise<string> => {
     message = await resp.text();
   } catch (err) { message = THERELAY_STOPPED; }
 
-  // console.log("theRelayStatus", message);
   return message;
 };
 
@@ -90,28 +93,23 @@ const theRelayStop = async (): Promise<string> => {
   return message;
 };
 
-const theRelayStart = async (): Promise<string> => {
+const theRelayStart = async (params: TheRelayParamsType): Promise<string> => {
+  theRelayParams = params;
+  if (theRelayParams.verbose) console.info("TheRelay params", theRelayParams);
+
   let message = "";
-  const theRelayPort = new URL(THERELAY_URL).port;
+  const theRelay = new URL(theRelayParams.therelayUrl || THERELAY_URL);
 
   if (await theRelayStatus() == THERELAY_RUNNING) {
     message = `ALREADY ${THERELAY_RUNNING}`;
   } else {
     message = THERELAY_STARTING;
-    server = app.listen(theRelayPort, () => {
-      console.info(`TheRelay listening on ${THERELAY_URL}`);
+    server = app.listen(theRelay.port, () => {
+      console.info(`TheRelay listening on ${theRelay.href}`);
     });
   }
 
   return message;
 };
 
-const theRelay = async (cmd: string): Promise<string> => {
-  if (cmd == "stop") return await theRelayStop();
-  if (cmd == "status") return await theRelayStatus();
-  if (cmd == "start") return await theRelayStart();
-  return "Unknown command";
-};
-
-
-export { theRelay, theRelayStatus };
+export { theRelayStart, theRelayStatus, theRelayStop, theRelayParams };

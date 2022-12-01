@@ -1,12 +1,12 @@
 /* import the ipfs-http-client library */
-import { IPFS_RUNNING, IPFS_STOPPED, OptionsType } from "@lib/types";
+import { IPFS_RUNNING, IPFS_STOPPED, IpfsParamsType } from "@lib/types";
+import { utilsResolveUrl } from "@lib/utils";
 import { create, IPFSHTTPClient } from "ipfs-http-client";
 
-const ipfsNew = async (options: OptionsType = {}): Promise<IPFSHTTPClient | null> => {
-  const url = options?.ipfsApiUrl ? new URL(options?.ipfsApiUrl) : { host: "127.0.0.1", port: 5001 };
-  const host = options.ipfsHost || url.host;
-  const port = Number(options.ipfsApiPort || url.port);
-  // console.log(`ipfsAdd { ${host}, ${port} }`);
+const ipfsNew = async (params: IpfsParamsType): Promise<IPFSHTTPClient | null> => {
+  // console.log("IPFS NEW", params);
+
+  const { host, port } = utilsResolveUrl(params.ipfsApi || "", params.ipfsUrl || "");
 
   let ipfs: IPFSHTTPClient | null = null;
   try {
@@ -20,15 +20,14 @@ const ipfsNew = async (options: OptionsType = {}): Promise<IPFSHTTPClient | null
   return ipfs;
 };
 
-const ipfsVersion = async (options: OptionsType = {}): Promise<string> => {
-  const ipfs = await ipfsNew(options);
+const ipfsVersion = async (params: IpfsParamsType): Promise<string> => {
+  const ipfs = await ipfsNew(params);
 
   return ipfs ? (await ipfs.version()).version : "";
 };
 
-
-const ipfsStatus = async (options: OptionsType = {}): Promise<string> => {
-  return await ipfsNew(options) ? IPFS_RUNNING : IPFS_STOPPED;
+const ipfsStatus = async (params: IpfsParamsType): Promise<string> => {
+  return await ipfsNew(params) ? IPFS_RUNNING : IPFS_STOPPED;
 };
 
 export { ipfsNew, ipfsVersion, ipfsStatus };

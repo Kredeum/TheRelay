@@ -1,6 +1,7 @@
 import { fetchJson } from "@lib/fetch/fetchJson";
 import { metadataSave } from "@lib/metadata/metadataSave";
-import { readMetadata } from "@lib/metadata/metadataRead";
+import { metadataGet } from "@lib/metadata/metadataGet";
+import { theRelayParams } from "@lib/theRelay";
 
 type TokenType = { id: string; tokenURI: string; metadata?: unknown; metadataCid?: string }
 
@@ -23,15 +24,16 @@ const metadataAdd = async (token: TokenType, chainId = 1): Promise<void> => {
   else return;
   if (Number(chainID) > 0) chainId = Number(chainID);
 
-  // console.log("metadataAdd", chainId, address, tokenID);
 
-  const savedMetadata: unknown = readMetadata(address, tokenID, chainId);
+  const savedMetadata: unknown = await metadataGet(chainId, address, tokenID);
+
   if (savedMetadata == "") {
     const uri = token.tokenURI.replace(/^ipfs:\/\//, "https://ipfs.io/ipfs/");
-
     token.metadata = await fetchJson(uri);
-
     token.metadataCid = await metadataSave(token.metadata, address, tokenID, chainId);
+
+    console.log("METADATA ADD", chainId, address, tokenID);
+    if (theRelayParams.verbose) console.log(token.metadata);
   } else {
     token.metadata = savedMetadata;
   }

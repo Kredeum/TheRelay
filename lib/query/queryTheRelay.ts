@@ -1,11 +1,11 @@
 import type { RequestInit } from "node-fetch";
-import { OptionsType, THERELAY_STARTING } from "@lib/types";
+import { TheRelayParamsType, THERELAY_STARTING } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
-import { theRelay } from "@lib/theRelay";
+import { theRelayStart, theRelayStop } from "@lib/theRelay";
 
-const queryTheRelay = async (theRelayUrl: string, endpoint: string, query: string, options?: OptionsType): Promise<unknown> => {
-  if (options?.logs) console.info(`${endpoint}\n${query}`);
+const queryTheRelay = async (endpoint: string, query: string, params: TheRelayParamsType): Promise<unknown> => {
+  if (params?.verbose) console.info(`${endpoint}\n${query}`);
 
   const config: RequestInit = {
     method: "POST",
@@ -17,15 +17,15 @@ const queryTheRelay = async (theRelayUrl: string, endpoint: string, query: strin
 
   // console.log("queryTheRelay", config);
 
-  const url = `${theRelayUrl}/${endpoint.replace("https://", "")}`;
+  const url = `${params?.therelayUrl || ""}/${endpoint.replace("https://", "")}`;
   // console.log("queryTheRelay", url);
 
   let status = "";
-  if (options?.therelay) status = await theRelay("start");
+  if (params?.therelay) status = await theRelayStart(params);
 
-  const json = await fetchJson(url, config);
+  const json = await fetchJson(url, config, false);
 
-  if (status == THERELAY_STARTING) await theRelay("stop");
+  if (status == THERELAY_STARTING) await theRelayStop();
 
   // console.log("queryTheRelay", json);
   return json;

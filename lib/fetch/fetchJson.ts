@@ -6,8 +6,8 @@ type FetchResponse = {
   error?: unknown;
 };
 
-const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): Promise<FetchResponse> => {
-  console.info(`FETCH JSON ${url}`);
+const fetchJson = async (url: string, config: RequestInit = { method: "GET" }, verbose = true): Promise<FetchResponse> => {
+  if (verbose) console.info(`FETCH JSON ${url}`);
   // console.log(config);
 
   let json: FetchResponse;
@@ -17,10 +17,10 @@ const fetchJson = async (url: string, config: RequestInit = { method: "GET" }): 
     json = (await res.json()) as FetchResponse;
   } catch (e) {
     json = { error: e };
-    console.error("fetchJson ERROR", e, url, config);
+    console.error("FETCH JSON ERROR", e, url, config);
   }
 
-  // console.log(`fetchJson ${url}`, JSON.stringify(json, null, 2));
+  // console.log(`FETCH JSON ${url}`, JSON.stringify(json, null, 2));
   return json;
 };
 

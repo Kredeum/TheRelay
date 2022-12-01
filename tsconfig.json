@@ -7,23 +7,13 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
-      "@lib/*": [
-        "lib/*"
-      ],
-      "@scripts/*": [
-        "scripts/*"
-      ],
+      "@lib/*": ["lib/*"],
+      "@scripts/*": ["scripts/*"]
     }
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["**/*.ts"],
+  "exclude": [],
   "ts-node": {
-    "require": [
-      "tsconfig-paths/register"
-    ]
+    "require": ["tsconfig-paths/register"]
   }
 }

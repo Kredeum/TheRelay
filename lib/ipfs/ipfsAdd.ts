@@ -1,10 +1,13 @@
-import { OptionsType } from "@lib/types";
+import { IpfsParamsType } from "@lib/types";
 import { ipfsNew } from "./ipfs";
 
-const ipfsAdd = async (buffer: string, options: OptionsType = {}): Promise<string> => {
-  const ipfs = await ipfsNew(options);
+const ipfsAdd = async (buffer: string, params: IpfsParamsType): Promise<string> => {
+  // console.log("ipfsAdd ~ params", params);
+  if (!params.ipfs) return "";
+
+  const ipfs = await ipfsNew(params);
   if (!ipfs) {
-    console.error("IPFS ADD ERROR : no IPFS service found", options);
+    console.error("IPFS ADD ERROR : no IPFS service found", params);
     return "";
   }
 

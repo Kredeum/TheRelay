@@ -2,22 +2,21 @@
 import type { RequestInit } from "node-fetch";
 import fetch from "node-fetch";
 
-const fetchText = async (url: string, config: RequestInit = { method: "GET" }): Promise<string> => {
-  console.info(`FETCH TEXT ${url}`);
+const fetchText = async (url: string, config: RequestInit = { method: "GET" }, verbose = true, error = "KO"): Promise<string> => {
+  if (verbose) console.info(`FETCH TEXT ${url}`);
   // console.log(config);
   // console.log(config.body);
 
-  let text = "KO";
-
+  let text = error;
   try {
     const res = await fetch(url, config);
 
     text = await res.text();
-  } catch (e) {
-    console.error("fetchText ERROR", e);
+  } catch (err) {
+    console.error("FETCH TEXT ERROR", (err as { message: string; }).message);
   }
 
-  // console.log("fetchText", Text);
+  // console.log("FETCH TEXT", Text);
   return text;
 };
 

@@ -1,44 +1,44 @@
-import { OptionsType, QueryVariablesType } from "@lib/types";
+import { TheQueryParamsType, TheQueryVariablesType } from "@lib/types";
 
-const queryGetVariables = (options: OptionsType): QueryVariablesType => {
-  const queryVariables: QueryVariablesType = {};
+const queryGetVariables = (params: TheQueryParamsType): TheQueryVariablesType => {
+  const queryVariables: TheQueryVariablesType = {};
   const whereNfts: Array<string> = [];
   const whereCollections: Array<string> = [];
   const filterNfts: Array<string> = [];
   const filterCollections: Array<string> = [];
 
-  if (options.first) {
-    queryVariables.first = String(options.first);
+  if (params.first) {
+    queryVariables.first = String(params.first);
     const filterFirst = `first: ${queryVariables.first}`;
 
     filterNfts.push(filterFirst);
     filterCollections.push(filterFirst);
   }
-  if (options.skip) {
-    queryVariables.skip = String(options.skip);
+  if (params.skip) {
+    queryVariables.skip = String(params.skip);
     const filterSkip = `skip: ${queryVariables.skip}`;
 
     filterNfts.push(filterSkip);
     filterCollections.push(filterSkip);
   }
 
-  if (options.collectionAddress) {
-    queryVariables.collectionAddress = String(options.collectionAddress).toLowerCase();
+  if (params.collectionAddress) {
+    queryVariables.collectionAddress = String(params.collectionAddress).toLowerCase();
     const whereNftsCollectionAddress = `contract: "${queryVariables.collectionAddress}"`;
     const whereCollectionsCollectionAddress = `id: "${queryVariables.collectionAddress}"`;
 
     whereNfts.push(whereNftsCollectionAddress);
     whereCollections.push(whereCollectionsCollectionAddress);
   }
-  if (options.ownerAddress) {
-    queryVariables.ownerAddress = String(options.ownerAddress).toLowerCase();
+  if (params.ownerAddress) {
+    queryVariables.ownerAddress = String(params.ownerAddress).toLowerCase();
     const whereOwnerAddress = `owner: "${queryVariables.ownerAddress}"`;
 
     whereNfts.push(whereOwnerAddress);
     whereCollections.push(whereOwnerAddress);
   }
-  if (options.tokenId) {
-    queryVariables.tokenId = String(options.tokenId);
+  if (params.tokenId) {
+    queryVariables.tokenId = String(params.tokenId);
     const whereTokenId = `tokenID: "${queryVariables.tokenId}"`;
 
     whereNfts.push(whereTokenId);

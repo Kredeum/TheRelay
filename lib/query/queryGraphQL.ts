@@ -1,8 +1,8 @@
-import type { GraphQLResponseType, OptionsType } from "@lib/types";
+import type { GraphQLResponseType, TheQueryParamsType } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
 
-const queryGraphQLResponse = async (endpoint: string, query: string): Promise<GraphQLResponseType> => {
+const queryGraphQLResponse = async (endpoint: string, query: string, verbose = true): Promise<GraphQLResponseType> => {
   // console.info(`queryGraphQLResponse ${endpoint}\n${query}`);
 
   const config = {
@@ -11,18 +11,18 @@ const queryGraphQLResponse = async (endpoint: string, query: string): Promise<Gr
     headers: { "Content-type": "application/json" }
   };
 
-  const resp = (await fetchJson(endpoint, config)) as GraphQLResponseType;
+  const resp = (await fetchJson(endpoint, config, verbose)) as GraphQLResponseType;
 
   return resp;
 };
 
-const queryGraphQL = async (endpoint: string, query: string, options?: OptionsType): Promise<string> => {
-  if (options?.logs) console.info(`${endpoint}\n${query}`);
+const queryGraphQL = async (endpoint: string, query: string, params?: TheQueryParamsType): Promise<string> => {
+  if (params?.verbose) console.info(`${endpoint}\n${query}`);
 
-  const resp = await queryGraphQLResponse(endpoint, query);
+  const resp = await queryGraphQLResponse(endpoint, query, params?.verbose);
   // console.log("queryGraphQL", JSON.stringify(resp, null, "  "));
 
-  // if (resp.errors) throw `queryGraphQL ERROR, ${JSON.stringify(resp.errors, null, "  ")}`;
+  // if (resp.errors) throw `GRAPHQL ERROR, ${JSON.stringify(resp.errors, null, "  ")}`;
 
   const json = JSON.stringify(resp.data || {}, null, "  ");
 

@@ -3,40 +3,36 @@
 import { Command } from "commander";
 import { ipfsCat } from "@lib/ipfs/ipfsCat";
 import { ipfsAdd } from "@lib/ipfs/ipfsAdd";
-import { OptionsType } from "@lib/types";
 import { ipfsStatus, ipfsVersion } from "@lib/ipfs/ipfs";
+import { IpfsParamsType } from "@lib/types";
 
 const main = async () => {
   const program = new Command();
 
   program
-    .description("IPFS commands");
+    .description("IPFS commands")
+    .option("-v , --verbose", "add traces", false)
+    .option("-i, --ipfs-url <string>", "ipfs url", "http://127.0.0.1")
+    .option("-a, --ipfs-api <string>", "ipfs api port or full url", "5001")
+    .option("-g, --ipfs-gateway <string>", "ipfs gateway port or full url", "8080");
+
+  const options: IpfsParamsType = program.opts();
 
   program.command("cat")
     .argument("<cid>", "IPFS CID to retreive from IPFS")
     .description("Display IPFS CID")
-    .option("-h, --ipfs-host <string>", "ipfs host, default 127.0.0.1")
-    .option("-p, --ipfs-gateway-port <string>", "ipfs gateway port, default 8080")
-    .option("-u, --ipfs-gateway-url <string>", "ipfs gateway url, default http://127.0.0.1:8080")
-    .action(async (cid: string, options: OptionsType) => (console.log(await ipfsCat(cid, options))));
+    .action(async (cid: string) => console.info(await ipfsCat(cid, options)));
 
   program.command("add")
     .argument("<buffer>", "buffer to add to IPFS")
     .description("Add buffer to IPFS")
-    .option("-h, --ipfs-host <string>", "ipfs host, default 127.0.0.1")
-    .option("-p, --ipfs-api-port <string>", "ipfs api port, default 5001")
-    .option("-u, --ipfs-api-url <string>", "ipfs api url, default http://127.0.0.1:5001")
-    .action(async (buffer: string, options: OptionsType) => (console.log(await ipfsAdd(buffer, options))));
-
+    .action(async (buffer: string) => console.info(await ipfsAdd(buffer, options)));
 
   program.command("version")
-    .option("-u, --ipfs-api-url <string>", "ipfs api url, default http://127.0.0.1:5001")
-    .action(async (buffer: string, options: OptionsType) => (console.log(await ipfsVersion(options))));
+    .action(async () => console.info(await ipfsVersion(options)));
 
   program.command("status")
-    .option("-u, --ipfs-api-url <string>", "ipfs api url, default http://127.0.0.1:5001")
-    .action(async (buffer: string, options: OptionsType) => (console.log(await ipfsStatus(options))));
-
+    .action(async () => console.info(await ipfsStatus(options)));
 
   await program.parseAsync(process.argv);
 };

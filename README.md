@@ -59,7 +59,11 @@ returns :
 
 ```
 
-You can replay it with `pnpm thequery wighawag/eip721-subgraph token`
+You can replay it with
+
+```
+pnpm thequery wighawag/eip721-subgraph token
+```
 
 Same query sent via TheRelay
 
@@ -122,7 +126,11 @@ returns :
 ]
 ```
 
-You can replay it with `pnpm thequery wighawag/eip721-subgraph token --therelay`
+You can replay it with
+
+```
+pnpm thequery wighawag/eip721-subgraph token --therelay
+```
 
 ### Features
 
