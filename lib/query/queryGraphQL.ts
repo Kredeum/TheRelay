@@ -20,11 +20,11 @@ const queryGraphQL = async (endpoint: string, query: string, params?: TheQueryPa
   if (params?.verbose) console.info(`${endpoint}\n${query}`);
 
   const resp = await queryGraphQLResponse(endpoint, query, params?.verbose);
-  // console.log("queryGraphQL", JSON.stringify(resp, null, "  "));
+  // console.log("queryGraphQL", JSON.stringify(resp, null, 2));
 
-  // if (resp.errors) throw `GRAPHQL ERROR, ${JSON.stringify(resp.errors, null, "  ")}`;
+  // if (resp.errors) throw `GRAPHQL ERROR, ${JSON.stringify(resp.errors, null, 2)}`;
 
-  const json = JSON.stringify(resp.data || {}, null, "  ");
+  const json = JSON.stringify(resp.data || {}, null, 2);
 
   // console.log("queryGraphQL", json);
   return json;

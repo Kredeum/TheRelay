@@ -1,10 +1,10 @@
 import type { RequestInit } from "node-fetch";
-import { TheRelayParamsType, THERELAY_STARTING } from "@lib/types";
+import { TheRelayParamsType, THERELAY_PARAMS_DEFAULT, THERELAY_STARTING } from "@lib/types";
 
 import { fetchJson } from "@lib/fetch/fetchJson";
 import { theRelayStart, theRelayStop } from "@lib/theRelay";
 
-const queryTheRelay = async (endpoint: string, query: string, params: TheRelayParamsType): Promise<unknown> => {
+const queryTheRelay = async (endpoint: string, query: string, params: TheRelayParamsType = THERELAY_PARAMS_DEFAULT): Promise<unknown> => {
   if (params?.verbose) console.info(`${endpoint}\n${query}`);
 
   const config: RequestInit = {
@@ -24,6 +24,7 @@ const queryTheRelay = async (endpoint: string, query: string, params: TheRelayPa
   if (params?.therelay) status = await theRelayStart(params);
 
   const json = await fetchJson(url, config, false);
+  if (params.verbose) console.info(url);
 
   if (status == THERELAY_STARTING) await theRelayStop();
 

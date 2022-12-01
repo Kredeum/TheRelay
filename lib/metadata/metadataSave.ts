@@ -31,7 +31,7 @@ const metadataSaveToFile = (json: string, cid: string, chainId: number, address:
 
 
 const metadataSave = async (jsonObject: unknown, address: string, tokenID: string, chainId = 0): Promise<string> => {
-  const jsonString = JSON.stringify(jsonObject, null, "  ");
+  const jsonString = JSON.stringify(jsonObject, null, 2);
   let cid: string;
 
   // Add json to IPFS

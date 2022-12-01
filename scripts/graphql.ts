@@ -1,9 +1,8 @@
 #!/usr/bin/env ts-node
 
 import { Command } from "commander";
-import { queryGraphQL } from "@lib/query/queryGraphQL";
+import { queryGraphQL, queryGetByPath } from "@lib/query/query";
 import { TheQueryParamsType } from "@lib/types";
-import { queryGetByPath } from "@lib/query/queryGet";
 
 const main = async () => {
   const program = new Command();

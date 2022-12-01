@@ -6,7 +6,7 @@ async function remoteGraphQL(url: string, query: string): Promise<string> {
   const config = { method: "POST", body: JSON.stringify({ query: query }) };
   const result = await (await fetch(url, config)).text();
 
-  console.log(JSON.stringify(JSON.parse(result), null, "  "));
+  console.log(JSON.stringify(JSON.parse(result), null, 2));
   return result;
 }
 

@@ -4,7 +4,7 @@ import type { Response } from "node-fetch";
 import express from "express";
 import {
   THERELAY_URL, THERELAY_RUNNING, THERELAY_STOPPING,
-  THERELAY_STOPPED, THERELAY_STARTING, THERELAY_ERROR, TheRelayParamsType
+  THERELAY_STOPPED, THERELAY_STARTING, THERELAY_ERROR, TheRelayParamsType, THERELAY_URL_DEFAULT, THERELAY_PARAMS_DEFAULT
 } from "@lib/types";
 import fetch from "node-fetch";
 import morgan from "morgan";
@@ -63,7 +63,7 @@ app.post("*", async (req, res): Promise<void> => {
 
   await metadataAdds(nfts, chainId);
 
-  const jsonMetadata = JSON.stringify(nfts, null, "  ");
+  const jsonMetadata = JSON.stringify(nfts, null, 2);
   // console.log("TheRelay", jsonMetadata);
 
   res.json(jsonMetadata);
@@ -93,7 +93,8 @@ const theRelayStop = async (): Promise<string> => {
   return message;
 };
 
-const theRelayStart = async (params: TheRelayParamsType): Promise<string> => {
+
+const theRelayStart = async (params: TheRelayParamsType = THERELAY_PARAMS_DEFAULT): Promise<string> => {
   theRelayParams = params;
   if (theRelayParams.verbose) console.info("TheRelay params", theRelayParams);
 

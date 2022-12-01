@@ -7,8 +7,8 @@ Different scripts are available :
 
 and generic utilities :
 
-1. GraphQL script : to query GraphQL endpoints in pure GraphQL
 1. IPFS script : to manage IPFS files
+1. GraphQL script : to query GraphQL endpoints in pure GraphQL
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ and generic utilities :
 
 ## Installation
 
-```
+```shell
 pnpm install
 ```
 
@@ -27,7 +27,7 @@ pnpm install
 
 TheRelay is a service that can be run as a daemon on your local machine or on a remote server
 
-```
+```text
 Usage: pnpm therelay [options] [command]
 
 Manage TheRelay daemon
@@ -59,7 +59,7 @@ TheQuery use pre-defined queries, located in `queries` directory
 
 Metadata retreived by the TheRelay is stored on IPFS, and in case IPFS is not available, also stores metadata on the local filesystem of TheRelay machine in `datas` directory
 
-```
+```text
 Usage: pnpm thequery [options] <graphName> <queryName>
 
 Query TheGraph, transparent mode or via TheRelay proxy (-r)
@@ -83,13 +83,13 @@ Options:
 
 Query example (without TheRelay) :
 
-```
+```shell
 pnpm thequery wighawag/eip721-subgraph tokens
 ```
 
 Query example with TheRelay :
 
-```
+```shell
 pnpm thequery wighawag/eip721-subgraph tokens -r
 ```
 
@@ -98,11 +98,11 @@ Default local relay is http://127.0.0.1:4004 (launched for the time of the query
 
 Query examples with parameters :
 
-```
+```shell
 pnpm thequery wighawag/eip721-subgraph my-tokens --owner-address 0xa6d856e4e9b1d12f42687bcacd691ba48008d6c3 --verbose
 ```
 
-```
+```shell
 pnpm thequery wighawag/eip721-subgraph collection --collection-address 0x00000000001ba87a34f0d3224286643b36646d81 -r
 ```
 
@@ -110,7 +110,7 @@ pnpm thequery wighawag/eip721-subgraph collection --collection-address 0x0000000
 
 _To run IFPS command you should have a IPFS server running locally or remotely_
 
-```
+```text
 Usage: pnpm ipfs [options] [command]
 
 IPFS commands
@@ -132,19 +132,19 @@ Commands:
 
 Add to IPFS example :
 
-```
+```shell
 pnpm ipfs add "TheRelay test"
 ```
 
 Get from IPFS example :
 
-```
+```shell
 pnpm ipfs cat bafybeidg3zkcudh4mvpaevcy3ezdmzsxuel6jgshl4rsu2h35672t3blvm
 ```
 
 ### GraphQL generic utility
 
-```
+```text
 Usage: pnpm graphql [options] <endpoint> <queryPath> [queryParams]
 
 Query Graphql, query whatever GraphQL service
@@ -160,6 +160,6 @@ Options:
 
 Query example :
 
-```
+```shell
 pnpm graphql https://api.thegraph.com/subgraphs/name/wighawag/eip721-subgraph wighawag/eip721-subgraph/tokens
 ```

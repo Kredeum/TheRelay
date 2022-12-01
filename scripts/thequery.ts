@@ -4,8 +4,7 @@ import { Command } from "commander";
 
 import { TheQueryParamsType, THERELAY_URL_DEFAULT } from "@lib/types";
 
-import { queryGetByName, queryGetTheGraphEndpoint } from "@lib/query/queryGet";
-import { queryTheGraph } from "@lib/query/queryTheGraph";
+import { queryGetByName, queryGetTheGraphEndpoint, queryTheGraph, queryTheRelay } from "@lib/query/query";
 
 const main = async () => {
   const program = new Command();
@@ -30,7 +29,8 @@ const main = async () => {
       const endpoint = queryGetTheGraphEndpoint(graphName);
       const query = queryGetByName(graphName, queryName);
 
-      console.info(await queryTheGraph(endpoint, query, options));
+      const queryTheOne = options.therelay ? queryTheRelay : queryTheGraph;
+      console.info(await queryTheOne(endpoint, query, options));
     });
 
   await program.parseAsync(process.argv);
